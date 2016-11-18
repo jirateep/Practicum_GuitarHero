@@ -2,11 +2,13 @@ package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.TapsterGame;
+import com.mygdx.game.GuitarHeroGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new TapsterGame(), config);
+		config.width = GuitarHeroGame.WIDTH;
+		config.height = GuitarHeroGame.HEIGHT;
+		new LwjglApplication(new GuitarHeroGame(), config);
 	}
 }

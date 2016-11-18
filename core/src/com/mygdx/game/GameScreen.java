@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 
 public class GameScreen extends ScreenAdapter {
 
-	private TapsterGame tapsterGame;
+	private GuitarHeroGame guitarHeroGame;
 	private World world;
 	private WorldRenderer worldRenderer;
 	
-	public GameScreen(TapsterGame tapsterGame) {
-		this.tapsterGame = tapsterGame;
+	public GameScreen(GuitarHeroGame guitarHeroGame) {
+		this.guitarHeroGame = guitarHeroGame;
 		world = new World();
-		worldRenderer = new WorldRenderer();
+		worldRenderer = new WorldRenderer(world);
 	}
 	
 	public void render(float delta) {
