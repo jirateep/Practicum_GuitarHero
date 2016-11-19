@@ -14,6 +14,10 @@ public class Circle {
 	}
 	
 	public void update() {
+		playing();
+	}
+	
+	private void playing() {
 		position.y--;
 	}
 }
