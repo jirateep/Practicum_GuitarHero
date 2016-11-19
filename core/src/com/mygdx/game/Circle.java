@@ -7,6 +7,7 @@ public class Circle {
 
 	Vector2 position;
 	Texture circleImg;
+	boolean removeThis = false;
 	
 	public Circle (float x) {
 		circleImg = new Texture("badlogic.jpg");
@@ -15,9 +16,16 @@ public class Circle {
 	
 	public void update() {
 		playing();
+		deleting();
 	}
 	
 	private void playing() {
-		position.y--;
+		position.y -= World.speed;
+	}
+	
+	private void deleting() {
+		if(position.y + circleImg.getHeight() < 0) {
+			removeThis = true;
+		}
 	}
 }
