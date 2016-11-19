@@ -10,7 +10,7 @@ public class Circle {
 	boolean removeThis = false;
 	
 	public Circle (float x) {
-		circleImg = new Texture("badlogic.jpg");
+		circleImg = new Texture("redCircle.png");
 		position = new Vector2(x,GuitarHeroGame.HEIGHT);
 	}
 	

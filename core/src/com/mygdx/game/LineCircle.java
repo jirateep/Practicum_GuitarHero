@@ -9,16 +9,18 @@ public class LineCircle {
 	public int [] songTime;
 	public Timer timer;
 	public int pushButtonKey;
-	public Texture pushButtonImg;
+	public Texture pushUnPressButtonImg;
+	public Texture pushPressButtonImg;
 	public float buttonYPosition = 10;
 	public boolean isPress = false;
 	
-	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushButtonImg) {
+	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg) {
 		this.x = x;
 		this.songTime = songTime;
 		this.timer = timer;
 		this.pushButtonKey = pushButtonKey;
-		this.pushButtonImg = pushButtonImg;
+		this.pushUnPressButtonImg = pushUnPressButtonImg;
+		this.pushPressButtonImg = pushPressButtonImg;
 	}
 	
 	public void update() {
@@ -51,8 +53,9 @@ public class LineCircle {
 		for(int i=0;i<circles.length;i++) {
 			if(circles[i] != null) {
 				distance = circles[i].position.y - buttonYPosition;
-				if(circles[i].position.y < GuitarHeroGame.HEIGHT / 2 && distance >= 0) {
-					minDistance = Math.min(minDistance, distance);
+				System.out.print("distance: " + distance);
+				if(distance <= 300 && distance < minDistance) {
+					minDistance = distance;
 					position = i;
 				}
 			}
@@ -62,6 +65,7 @@ public class LineCircle {
 			circles[position].removeThis = true;
 			removeCircle(position);
 		}
+		System.out.println(minDistance);
 		
 		return minDistance;
 	}

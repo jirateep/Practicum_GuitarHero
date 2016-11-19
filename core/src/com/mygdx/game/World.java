@@ -12,13 +12,14 @@ public class World {
 	public int [] songRed = {0,100,200,350,400,425,1000};
 	public Timer timer;
 	public static int speed = 3;
-	public Texture redButtonImg = new Texture("FF0000.png");
+	public Texture redDefaultButtonImg = new Texture("redButtonFrame.png");
+	public Texture redPressButtonImg = new Texture("redButtonFramePress.png");
 	
 	public World() {
 		
 		timer = new Timer();
 		
-		redLine = new LineCircle(0,songRed,timer,Keys.SPACE,redButtonImg);
+		redLine = new LineCircle(0,songRed,timer,Keys.SPACE,redDefaultButtonImg,redPressButtonImg);
 		//circleBlue = new LineCircle();
 		//circleGreen = new LineCircle();
 		//circleYellow = new LineCircle();

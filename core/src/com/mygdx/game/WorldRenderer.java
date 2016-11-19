@@ -17,7 +17,7 @@ public class WorldRenderer {
 		
 		batch.begin();
 		drawCircleLine(world.redLine.circles);
-		drawPressButton(world.redLine.isPress);
+		drawPressButton(world.redLine);
 		batch.end();
 	}
 	
@@ -29,7 +29,13 @@ public class WorldRenderer {
 		}
 	}
 	
-	public void drawPressButton(boolean isPress) {
+	public void drawPressButton(LineCircle lineCircle) {
+		if(lineCircle.isPress) {
+			batch.draw(lineCircle.pushPressButtonImg, lineCircle.x,lineCircle.buttonYPosition);
+			lineCircle.isPress = false;
+		} else {
+			batch.draw(lineCircle.pushUnPressButtonImg, lineCircle.x,lineCircle.buttonYPosition);
+		}
 		
 	}
 }
