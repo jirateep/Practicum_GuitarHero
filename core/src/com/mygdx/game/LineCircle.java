@@ -36,7 +36,7 @@ public class LineCircle {
 	public void buttonPress() {
 		if(isButtonPress()) {
 			float distance = removeNearestCircle();
-			//updateScore(distance);
+			World.score.updateScore(distance);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class LineCircle {
 		for(int i=0;i<circles.length;i++) {
 			if(circles[i] != null) {
 				distance = circles[i].position.y - buttonYPosition;
-				System.out.print("distance: " + distance);
+				//System.out.print("distance: " + distance);
 				if(distance <= 300 && distance < minDistance) {
 					minDistance = distance;
 					position = i;
@@ -67,7 +67,7 @@ public class LineCircle {
 			circles[position].removeThis = true;
 			removeCircle(position);
 		}
-		System.out.println(minDistance);
+		//System.out.println(minDistance);
 		
 		return minDistance;
 	}
@@ -112,7 +112,7 @@ public class LineCircle {
 	}
 	
 	private void addCircles(int pos) {
-		System.out.println(x);
+		//System.out.println(x);
 		circles[pos] = new Circle(x,circleImg);
 	}
 }

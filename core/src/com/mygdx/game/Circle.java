@@ -26,6 +26,7 @@ public class Circle {
 	private void deleting() {
 		if(position.y + circleImg.getHeight() < 0) {
 			removeThis = true;
+			World.score.updateCombo(-1);
 		}
 	}
 }

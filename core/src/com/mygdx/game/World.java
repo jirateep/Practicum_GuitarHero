@@ -9,7 +9,7 @@ public class World {
 	LineCircle blueLine;
 	//LineCircle greenLine;
 	//LineCircle yellowLine;
-	public int [] songRed = {0,100,200,350,400,425,1000};
+	public int [] songRed = {0,100,200,350,400,425,1000, };
 	public int [] songBlue = songRed;
 	public Timer timer;
 	public static int speed = 10;
@@ -19,7 +19,7 @@ public class World {
 	public Texture blueDefaultButtonImg = new Texture("blueButtonFrame.png");
 	public Texture bluePressButtonImg = new Texture("blueButtonFramePress.png");
 	public Texture blueCircleImg = new Texture("blueCircle.png");
-	
+	public static Score score;
 	
 	public World() {
 		
@@ -29,6 +29,7 @@ public class World {
 		blueLine = new LineCircle(300,songBlue,timer,Keys.F,blueDefaultButtonImg,bluePressButtonImg,blueCircleImg);
 		//greenLine = new LineCircle();
 		//yellowLine = new LineCircle();
+		score = new Score();
 	}
 	
 	public void update(float delta) {
