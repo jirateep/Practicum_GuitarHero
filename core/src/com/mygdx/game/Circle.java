@@ -9,8 +9,8 @@ public class Circle {
 	Texture circleImg;
 	boolean removeThis = false;
 	
-	public Circle (float x) {
-		circleImg = new Texture("redCircle.png");
+	public Circle (float x,Texture circleImg) {
+		this.circleImg = circleImg;
 		position = new Vector2(x,GuitarHeroGame.HEIGHT);
 	}
 	

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class LineCircle {
 	float x;
-	public Circle [] circles = new Circle [20];
+	public Circle [] circles = new Circle [30];
 	public int [] songTime;
 	public Timer timer;
 	public int pushButtonKey;
@@ -13,14 +13,16 @@ public class LineCircle {
 	public Texture pushPressButtonImg;
 	public float buttonYPosition = 10;
 	public boolean isPress = false;
+	public Texture circleImg;
 	
-	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg) {
+	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg,Texture circleImg) {
 		this.x = x;
 		this.songTime = songTime;
 		this.timer = timer;
 		this.pushButtonKey = pushButtonKey;
 		this.pushUnPressButtonImg = pushUnPressButtonImg;
 		this.pushPressButtonImg = pushPressButtonImg;
+		this.circleImg = circleImg;
 	}
 	
 	public void update() {
@@ -110,6 +112,7 @@ public class LineCircle {
 	}
 	
 	private void addCircles(int pos) {
-		circles[pos] = new Circle(x);
+		System.out.println(x);
+		circles[pos] = new Circle(x,circleImg);
 	}
 }

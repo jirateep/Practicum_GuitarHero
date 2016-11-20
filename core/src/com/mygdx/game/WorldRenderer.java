@@ -16,8 +16,10 @@ public class WorldRenderer {
 	public void render() {
 		
 		batch.begin();
-		drawCircleLine(world.redLine.circles);
 		drawPressButton(world.redLine);
+		drawCircleLine(world.redLine.circles);
+		drawPressButton(world.blueLine);
+		drawCircleLine(world.blueLine.circles);
 		batch.end();
 	}
 	
