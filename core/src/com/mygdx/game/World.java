@@ -57,14 +57,17 @@ public class World {
 		timer = new Timer();
 		
 		xPosition = new int [NBOFCOLOR];
-		xPosition[RED] = 0;
-		for(int i=1;i<xPosition.length;i++) {
-			xPosition[i] = xPosition[i-1] + 300;
-		}
+		xPosition[RED] = GuitarHeroGame.WIDTH/2-2*eachLineImg[BLUE][UNPRESS].getWidth() - 15;
+		xPosition[BLUE] = GuitarHeroGame.WIDTH/2-eachLineImg[BLUE][UNPRESS].getWidth() - 5;
+		xPosition[GREEN] = GuitarHeroGame.WIDTH/2 + 5;
+		xPosition[YELLOW] = GuitarHeroGame.WIDTH/2 + 15 + eachLineImg[BLUE][UNPRESS].getWidth();
+		//for(int i=1;i<xPosition.length;i++) {
+		//	xPosition[i] = xPosition[i-1] + 300;
+		//}
 		
 		lines = new LineCircle [NBOFCOLOR];
 		for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i] = new LineCircle(xPosition[i],song[i],timer,keys[i],eachLineImg[i][UNPRESS],eachLineImg[i][PRESS],eachLineImg[i][CIRCLE]);
+			lines[i] = new LineCircle(xPosition[i],song[i],timer,keys[i],eachLineImg[i][UNPRESS],eachLineImg[i][PRESS],eachLineImg[i][CIRCLE],i);
 		}
 		
 		score = new Score();

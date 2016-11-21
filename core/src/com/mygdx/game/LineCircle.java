@@ -15,8 +15,9 @@ public class LineCircle {
 	public float buttonYPosition = 10;
 	public boolean isPress = false;
 	public Texture circleImg;
+	public int color;
 	
-	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg,Texture circleImg) {
+	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg,Texture circleImg,int color) {
 		this.x = x;
 		this.songTime = songTime;
 		this.timer = timer;
@@ -24,6 +25,7 @@ public class LineCircle {
 		this.pushUnPressButtonImg = pushUnPressButtonImg;
 		this.pushPressButtonImg = pushPressButtonImg;
 		this.circleImg = circleImg;
+		this.color = color;
 	}
 	
 	public void update() {
@@ -114,6 +116,6 @@ public class LineCircle {
 	
 	private void addCircles(int pos) {
 		//System.out.println(x);
-		circles[pos] = new Circle(x,circleImg);
+		circles[pos] = new Circle(x,circleImg,color);
 	}
 }

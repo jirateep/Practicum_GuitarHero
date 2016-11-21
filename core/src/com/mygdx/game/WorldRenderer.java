@@ -25,10 +25,9 @@ public class WorldRenderer {
 	
 	public void drawCircleLine(Circle [] circles) {
 		for(int i=circles.length - 1;i >= 0;i--) {
-			if(circles[i] != null) {
-				float factor = (circles[i].initYPosition-circles[i].position.y)/circles[i].initYPosition;
-				float nowWidth = circles[i].circleImg.getWidth() * factor;
-				float nowHeight = circles[i].circleImg.getHeight() * factor;
+			if(circles[i] != null && circles[i].position.y <= GuitarHeroGame.HEIGHT * 4 / 5) {
+				float nowWidth = circles[i].circleImg.getWidth() * circles[i].factor;
+				float nowHeight = circles[i].circleImg.getHeight() * circles[i].factor;
 				batch.draw(circles[i].circleImg, circles[i].position.x,circles[i].position.y, nowWidth, nowHeight);
 				//batch.draw(circles[i].circleImg, circles[i].position.x,circles[i].position.y);
 			}
