@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class LineCircle {
 	float x;
-	public Circle [] circles = new Circle [30];
+	public static final int MAXCIRCLEPERLINE = 10;
+	public Circle [] circles = new Circle [MAXCIRCLEPERLINE];
 	public int [] songTime;
 	public Timer timer;
 	public int pushButtonKey;
@@ -56,7 +57,7 @@ public class LineCircle {
 			if(circles[i] != null) {
 				distance = circles[i].position.y - buttonYPosition;
 				//System.out.print("distance: " + distance);
-				if(distance <= 300 && distance < minDistance) {
+				if(distance <= 200 && distance < minDistance) {
 					minDistance = distance;
 					position = i;
 				}

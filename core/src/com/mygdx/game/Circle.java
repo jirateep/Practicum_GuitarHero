@@ -5,13 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Circle {
 
-	Vector2 position;
-	Texture circleImg;
-	boolean removeThis = false;
+	public Vector2 position;
+	public Texture circleImg;
+	public boolean removeThis = false;
+	public float initYPosition = GuitarHeroGame.HEIGHT;
 	
 	public Circle (float x,Texture circleImg) {
 		this.circleImg = circleImg;
-		position = new Vector2(x,GuitarHeroGame.HEIGHT);
+		position = new Vector2(x,initYPosition);
 	}
 	
 	public void update() {

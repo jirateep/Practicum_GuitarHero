@@ -16,15 +16,15 @@ public class WorldRenderer {
 	public void render() {
 		
 		batch.begin();
-		drawPressButton(world.redLine);
-		drawCircleLine(world.redLine.circles);
-		drawPressButton(world.blueLine);
-		drawCircleLine(world.blueLine.circles);
+		for(int i=0;i<World.NBOFCOLOR;i++) {
+			drawPressButton(world.lines[i]);
+			drawCircleLine(world.lines[i].circles);
+		}
 		batch.end();
 	}
 	
 	public void drawCircleLine(Circle [] circles) {
-		for(int i=0;i < circles.length;i++) {
+		for(int i=circles.length - 1;i >= 0;i--) {
 			if(circles[i] != null) {
 				batch.draw(circles[i].circleImg, circles[i].position.x,circles[i].position.y);
 			}
