@@ -16,11 +16,23 @@ public class WorldRenderer {
 	public void render() {
 		
 		batch.begin();
-		for(int i=0;i<World.NBOFCOLOR;i++) {
+		drawDotLine();
+		batch.draw(world.dotLine.dotImg, 885, 850);
+		for(int i=0;i<World.NBOFCOLOR;i++) {	
 			drawPressButton(world.lines[i]);
 			drawCircleLine(world.lines[i].circles);
 		}
 		batch.end();
+	}
+	
+	public void drawDotLine() {
+		for(int i=0;i<DotLine.NBOFDOT;i++) {
+			for(int j=0;j<DotLine.NBOFLINE;j++) {
+				if(world.dotLine.dotLine[i][j] != null && world.dotLine.dotLine[i][j].y <= GuitarHeroGame.HEIGHT * 4 / 5) {
+					batch.draw(world.dotLine.dotImg,world.dotLine.dotLine[i][j].x,world.dotLine.dotLine[i][j].y);
+				}
+			}
+		}
 	}
 	
 	public void drawCircleLine(Circle [] circles) {

@@ -22,13 +22,15 @@ public class World {
 	public int [] xPosition;
 	public int [] keys = {Keys.D,Keys.F,Keys.G,Keys.H};
 	public int [][] song;
-	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000};
+	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000};//{100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000};
 	public int [] songBlue = songRed;
 	public int [] songGreen = {50,150,250,350,450,550,650,750,850,950,1050};
 	public int [] songYellow = songGreen;
 	
 	public Timer timer;
-	public static int speed = 5;
+	public static int speed = 10;
+	public Texture dotImg;
+	public DotLine dotLine;
 	
 	public static Score score;
 	
@@ -70,6 +72,9 @@ public class World {
 			lines[i] = new LineCircle(xPosition[i],song[i],timer,keys[i],eachLineImg[i][UNPRESS],eachLineImg[i][PRESS],eachLineImg[i][CIRCLE],i);
 		}
 		
+		dotImg = new Texture("dotResize.png");
+		dotLine = new DotLine(dotImg,this);
+		
 		score = new Score();
 	}
 	
@@ -78,5 +83,6 @@ public class World {
 			lines[i].update();
 		}
 		timer.update();
+		dotLine.update();
 	}
 }
