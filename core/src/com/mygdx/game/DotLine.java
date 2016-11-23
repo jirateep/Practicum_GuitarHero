@@ -65,15 +65,15 @@ public class DotLine {
 		float factor = (GuitarHeroGame.HEIGHT-yPosition)/GuitarHeroGame.HEIGHT;
 		switch(line) {
 			case 0:
-				return GuitarHeroGame.WIDTH/2 - 40 - 2 * world.eachLineImg[World.RED][World.CIRCLE].getWidth()*factor - dotImg.getWidth()/2;
+				return GuitarHeroGame.WIDTH/2 - 40 - 2 * world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
 			case 1:
-				return GuitarHeroGame.WIDTH/2 - 20 - world.eachLineImg[World.RED][World.CIRCLE].getWidth()*factor - dotImg.getWidth()/2;
+				return GuitarHeroGame.WIDTH/2 - 20 - world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
 			case 2:
 				return GuitarHeroGame.WIDTH/2 - dotImg.getWidth()/2;
 			case 3:
-				return GuitarHeroGame.WIDTH/2 + 20 + world.eachLineImg[World.RED][World.CIRCLE].getWidth()*factor - dotImg.getWidth()/2;
+				return GuitarHeroGame.WIDTH/2 + 20 + world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
 			case 4:
-				return GuitarHeroGame.WIDTH/2 + 40 + 2 * world.eachLineImg[World.RED][World.CIRCLE].getWidth()*factor - dotImg.getWidth()/2;
+				return GuitarHeroGame.WIDTH/2 + 40 + 2 * world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
 			default:
 				break;
 		}

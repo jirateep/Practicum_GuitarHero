@@ -13,10 +13,11 @@ public class World {
 	
 	public static final int PRESS = 0;
 	public static final int UNPRESS = 1;
-	public static final int CIRCLE = 2;
-	public static final int NBOFSTATE = 3;
+	public static final int NOTE = 2;
+	public static final int NOTECOMBO = 3;
+	public static final int NBOFSTATE = 4;
 
-	LineCircle [] lines;
+	NoteLine [] lines;
 	
 	public Texture [][] eachLineImg;
 	public int [] xPosition;
@@ -45,16 +46,20 @@ public class World {
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
 		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
 		eachLineImg[RED][PRESS] = new Texture("redButtonFramePress.png");
-		eachLineImg[RED][CIRCLE] = new Texture("redCircle.png");
+		eachLineImg[RED][NOTE] = new Texture("redCircle.png");
+		eachLineImg[RED][NOTECOMBO] = new Texture("redCircleCombo.png");
 		eachLineImg[BLUE][UNPRESS] = new Texture("blueButtonFrame.png");
 		eachLineImg[BLUE][PRESS] = new Texture("blueButtonFramePress.png");
-		eachLineImg[BLUE][CIRCLE] = new Texture("blueCircle.png");
+		eachLineImg[BLUE][NOTE] = new Texture("blueCircle.png");
+		eachLineImg[BLUE][NOTECOMBO] = new Texture("blueCircleCombo.png");
 		eachLineImg[GREEN][UNPRESS] = new Texture("greenButtonFrame.png");
 		eachLineImg[GREEN][PRESS] = new Texture("greenButtonFramePress.png");
-		eachLineImg[GREEN][CIRCLE] = new Texture("greenCircle.png");
+		eachLineImg[GREEN][NOTE] = new Texture("greenCircle.png");
+		eachLineImg[GREEN][NOTECOMBO] = new Texture("greenCircleCombo.png");
 		eachLineImg[YELLOW][UNPRESS] = new Texture("yellowButtonFrame.png");
 		eachLineImg[YELLOW][PRESS] = new Texture("yellowButtonFramePress.png");
-		eachLineImg[YELLOW][CIRCLE] = new Texture("yellowCircle.png");
+		eachLineImg[YELLOW][NOTE] = new Texture("yellowCircle.png");
+		eachLineImg[YELLOW][NOTECOMBO] = new Texture("yellowCircleCombo.png");
 		
 		timer = new Timer();
 		
@@ -63,13 +68,10 @@ public class World {
 		xPosition[BLUE] = GuitarHeroGame.WIDTH/2-eachLineImg[BLUE][UNPRESS].getWidth() - 5;
 		xPosition[GREEN] = GuitarHeroGame.WIDTH/2 + 5;
 		xPosition[YELLOW] = GuitarHeroGame.WIDTH/2 + 15 + eachLineImg[BLUE][UNPRESS].getWidth();
-		//for(int i=1;i<xPosition.length;i++) {
-		//	xPosition[i] = xPosition[i-1] + 300;
-		//}
-		
-		lines = new LineCircle [NBOFCOLOR];
+
+		lines = new NoteLine [NBOFCOLOR];
 		for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i] = new LineCircle(xPosition[i],song[i],timer,keys[i],eachLineImg[i][UNPRESS],eachLineImg[i][PRESS],eachLineImg[i][CIRCLE],i);
+			lines[i] = new NoteLine(xPosition[i],song[i],timer,keys[i],eachLineImg[i],i);
 		}
 		
 		dotImg = new Texture("dotResize.png");
