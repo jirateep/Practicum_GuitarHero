@@ -14,8 +14,10 @@ public class LineCircle {
 	public Texture pushPressButtonImg;
 	public float buttonYPosition = 10;
 	public boolean isPress = false;
+	public boolean oldIsPress = false;
 	public Texture circleImg;
 	public int color;
+	private boolean isCollected = false;
 	
 	public LineCircle(int x,int [] songTime,Timer timer,int pushButtonKey,Texture pushUnPressButtonImg,Texture pushPressButtonImg,Texture circleImg,int color) {
 		this.x = x;
@@ -37,17 +39,22 @@ public class LineCircle {
 	}
 	
 	public void buttonPress() {
-		if(isButtonPress()) {
+		if(isButtonPress() && !oldIsPress) {
 			float distance = removeNearestCircle();
 			World.score.updateScore(distance);
 		}
+		oldIsPress = isPress;
 	}
 
 	private boolean isButtonPress() {
-		if(Gdx.input.isKeyJustPressed(pushButtonKey)) {
+		if(Gdx.input.isKeyPressed(pushButtonKey) && !isCollected) {
 			isPress = true;
 			return true;
 		}
+		if(!Gdx.input.isKeyPressed(pushButtonKey)) {
+			isCollected = false;
+		}
+		
 		return false;
 	}
 	
@@ -69,6 +76,7 @@ public class LineCircle {
 		if(position != -1) {
 			circles[position].removeThis = true;
 			removeCircle(position);
+			isCollected = true;
 		}
 		//System.out.println(minDistance);
 		

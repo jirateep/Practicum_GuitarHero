@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+//import com.badlogic.gdx.Gdx;
+//import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
 public class Score {
 
 	public int score = 0;
@@ -13,20 +16,21 @@ public class Score {
 	public int [] scoreCriteria;
 	public int [] distanceCriteria;
 	public int [] countCombo;
+	public int comboScore = 10;
 	
 	public Score() {
 		scoreCriteria = new int [NBOFCRITERIA];
-		scoreCriteria[PERFECT] = 1000;
-		scoreCriteria[EXCELLENT] = 500;
-		scoreCriteria[GOOD] = 100;
-		scoreCriteria[BAD] = 50;
+		scoreCriteria[PERFECT] = 200;
+		scoreCriteria[EXCELLENT] = 100;
+		scoreCriteria[GOOD] = 50;
+		scoreCriteria[BAD] = 20;
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 50;
-		distanceCriteria[EXCELLENT] = 100;
-		distanceCriteria[GOOD] = 200;
-		distanceCriteria[BAD] = 500;
+		distanceCriteria[PERFECT] = 30;
+		distanceCriteria[EXCELLENT] = 70;
+		distanceCriteria[GOOD] = 100;
+		distanceCriteria[BAD] = 300;
 		distanceCriteria[MISS] = 1000;
 		
 		countCombo = new int [NBOFCRITERIA];
@@ -39,10 +43,10 @@ public class Score {
 		System.out.println("score: " + score);
 		System.out.println("combo: " + combo);
 	}
-	
+
 	public void increaseScore(int nowCombo) {
 		if(nowCombo >= PERFECT && nowCombo <= MISS) {
-			score += scoreCriteria[nowCombo] + combo * 100;
+			score += scoreCriteria[nowCombo] + combo * comboScore;
 		}
 	}
 	

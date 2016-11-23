@@ -19,9 +19,9 @@ public class DotLine {
 	}
 	
 	public void update () {
-		if(world.timer.getTime() % 1 == 0) {
+		//if(world.timer.getTime() % 10 == 0) {
 			reserveNewDot();
-		}
+		//}
 		runDot();
 		deleteDot();
 	}
