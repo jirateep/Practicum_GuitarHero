@@ -126,6 +126,6 @@ public class NoteLine {
 	
 	private void addNote(int pos) {
 		//System.out.println(x);
-		notes[pos] = new Note(x,noteImg,color);
+		notes[pos] = new Note(x,noteImg,noteComboImg,color);
 	}
 }

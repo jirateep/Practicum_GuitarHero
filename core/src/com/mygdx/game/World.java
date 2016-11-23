@@ -23,9 +23,9 @@ public class World {
 	public int [] xPosition;
 	public int [] keys = {Keys.D,Keys.F,Keys.G,Keys.H};
 	public int [][] song;
-	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000};//{100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000};
+	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000,1010,1030,1090,1100,1120,1400,1420,1460,1500,1600,1700,1800,1880,1930,1950,1970,1990,2000};//{100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000};
 	public int [] songBlue = songRed;
-	public int [] songGreen = {50,150,250,350,450,550,650,750,850,950,1050};
+	public int [] songGreen = {50,150,250,350,450,550,650,750,850,950,1050,1070,1080,1150,1180,1210,1230,1260,1270,1310,1430,1470,1490,1510,1540,1580,1670,1840,1890,1900,1940,1980};
 	public int [] songYellow = songGreen;
 	
 	public Timer timer;
@@ -77,7 +77,7 @@ public class World {
 		dotImg = new Texture("dotResize.png");
 		dotLine = new DotLine(dotImg,this);
 		
-		score = new Score();
+		score = new Score(this);
 	}
 	
 	public void update(float delta) {
@@ -86,5 +86,6 @@ public class World {
 		}
 		timer.update();
 		dotLine.update();
+		score.updateReachComboTime();
 	}
 }

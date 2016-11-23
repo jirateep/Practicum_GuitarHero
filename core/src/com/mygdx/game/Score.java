@@ -17,23 +17,28 @@ public class Score {
 	public int [] distanceCriteria;
 	public int [] countCombo;
 	public int comboScore = 10;
+	public boolean reachComboTime = false;
+	private int comboTimeFactor = 2;
+	private int reachComboTimeNumber = 100;
+	private World world;
 	
-	public Score() {
+	public Score(World world) {
 		scoreCriteria = new int [NBOFCRITERIA];
-		scoreCriteria[PERFECT] = 200;
+		scoreCriteria[PERFECT] = 150;
 		scoreCriteria[EXCELLENT] = 100;
 		scoreCriteria[GOOD] = 50;
 		scoreCriteria[BAD] = 20;
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 30;
-		distanceCriteria[EXCELLENT] = 70;
+		distanceCriteria[PERFECT] = 25;
+		distanceCriteria[EXCELLENT] = 50;
 		distanceCriteria[GOOD] = 100;
 		distanceCriteria[BAD] = 300;
 		distanceCriteria[MISS] = 1000;
 		
 		countCombo = new int [NBOFCRITERIA];
+		this.world = world;
 	}
 	
 	public void updateScore(float distance) {
@@ -46,7 +51,11 @@ public class Score {
 
 	public void increaseScore(int nowCombo) {
 		if(nowCombo >= PERFECT && nowCombo <= MISS) {
-			score += scoreCriteria[nowCombo] + combo * comboScore;
+			if(reachComboTime) {
+				score += (scoreCriteria[nowCombo] + combo * comboScore) * comboTimeFactor;
+			} else {
+				score += scoreCriteria[nowCombo] + combo * comboScore;
+			}
 		}
 	}
 	
@@ -71,5 +80,15 @@ public class Score {
 		}
 		System.out.println("this combo " + criteria);
 		return criteria;
+	}
+	
+	public void updateReachComboTime() {
+		if(combo >= reachComboTimeNumber) {
+			world.timer.reachComboTimeStart = true;
+			reachComboTime = true;
+		} else {
+			world.timer.reachComboTimeStart = false;
+		}
+		world.timer.reachComboTimeTimerCount();
 	}
 }

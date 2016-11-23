@@ -35,13 +35,17 @@ public class WorldRenderer {
 		
 		batch.begin();
 		drawDotLine();
+		drawNoteLines();
+		drawScore();
+		drawCombo();
+		batch.end();
+	}
+	
+	public void drawNoteLines() {
 		for(int i=0;i<World.NBOFCOLOR;i++) {	
 			drawPressButton(world.lines[i]);
 			drawNoteLine(world.lines[i].notes);
 		}
-		drawScore();
-		drawCombo();
-		batch.end();
 	}
 	
 	public void drawScore() {
@@ -63,11 +67,11 @@ public class WorldRenderer {
 	
 	public void updateComboFont() {
 		int combo = World.score.combo;
-		if(combo <= 10) {
+		if(combo < 50) {
 			comboFont = b_bFont;
-		} else if(combo <= 20) {
+		} else if(combo < 80) {
 			comboFont = g_gFont;
-		} else if(combo < 30) {
+		} else if(combo < 100) {
 			comboFont = p_pFont;
 		} else {
 			comboFont = y_oFont;
@@ -100,9 +104,9 @@ public class WorldRenderer {
 	public void drawNoteLine(Note [] notes) {
 		for(int i=notes.length - 1;i >= 0;i--) {
 			if(notes[i] != null && notes[i].position.y <= GuitarHeroGame.HEIGHT * 3 / 4) {
-				float nowWidth = notes[i].noteImg.getWidth() * notes[i].factor;
-				float nowHeight = notes[i].noteImg.getHeight() * notes[i].factor;
-				batch.draw(notes[i].noteImg, notes[i].position.x,notes[i].position.y, nowWidth, nowHeight);
+				float nowWidth = notes[i].nowNoteImg.getWidth() * notes[i].factor;
+				float nowHeight = notes[i].nowNoteImg.getHeight() * notes[i].factor;
+				batch.draw(notes[i].nowNoteImg, notes[i].position.x,notes[i].position.y, nowWidth, nowHeight);
 			}
 		}
 	}

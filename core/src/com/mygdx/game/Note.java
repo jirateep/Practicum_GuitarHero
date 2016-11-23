@@ -7,23 +7,34 @@ public class Note {
 
 	public Vector2 position;
 	public Texture noteImg;
+	public Texture noteComboImg;
+	public Texture nowNoteImg;
 	public boolean removeThis = false;
 	public float initYPosition = GuitarHeroGame.HEIGHT;
 	public float factor;
 	public int color;
 	
-	
-	public Note (float x,Texture noteImg,int color) {
+	public Note (float x,Texture noteImg, Texture noteComboImg, int color) {
 		this.noteImg = noteImg;
+		this.noteComboImg = noteComboImg;
 		position = new Vector2(x,initYPosition);
 		factor = (initYPosition-position.y)/initYPosition;
 		this.color = color;
 	}
 	
 	public void update() {
+		updateNoteImg();
 		updateFactor();
 		playing();
 		deleting();
+	}
+	
+	private void updateNoteImg() {
+		if(World.score.reachComboTime) {
+			nowNoteImg = noteComboImg;
+		} else {
+			nowNoteImg = noteImg;
+		}
 	}
 	
 	private void updateFactor() {
