@@ -38,7 +38,17 @@ public class WorldRenderer {
 		drawNoteLines();
 		drawScore();
 		drawCombo();
+		drawNowComboString();
 		batch.end();
+	}
+	
+	public void drawNowComboString() {
+		if(World.score.nowComboString != null) {
+			String nowComboString = World.score.nowComboString;
+			float width = getFontWidth(y_oFont,nowComboString);
+			float xPosition = getCenterXPosition(width);
+			y_oFont.draw(batch,nowComboString,xPosition,GuitarHeroGame.HEIGHT- 100);
+		}
 	}
 	
 	public void drawNoteLines() {

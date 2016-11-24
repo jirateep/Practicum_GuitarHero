@@ -16,6 +16,8 @@ public class Score {
 	public int [] scoreCriteria;
 	public int [] distanceCriteria;
 	public int [] countCombo;
+	public String [] comboStrings;
+	public String nowComboString = null;
 	public int comboScore = 10;
 	public boolean reachComboTime = false;
 	private int comboTimeFactor = 2;
@@ -37,6 +39,13 @@ public class Score {
 		distanceCriteria[BAD] = 300;
 		distanceCriteria[MISS] = 1000;
 		
+		comboStrings = new String [NBOFCRITERIA];
+		comboStrings[PERFECT] = "PERFECT";
+		comboStrings[EXCELLENT] = "EXCELLENT";
+		comboStrings[GOOD] = "GOOD";
+		comboStrings[BAD] = "BAD";
+		comboStrings[MISS] = "MISS";
+		
 		countCombo = new int [NBOFCRITERIA];
 		this.world = world;
 	}
@@ -56,6 +65,8 @@ public class Score {
 			} else {
 				score += scoreCriteria[nowCombo] + combo * comboScore;
 			}
+			nowComboString = comboStrings[nowCombo];
+			world.timer.stayComboTimer = 0;
 		}
 	}
 	
@@ -89,6 +100,6 @@ public class Score {
 		} else {
 			world.timer.reachComboTimeStart = false;
 		}
-		world.timer.reachComboTimeTimerCount();
+		//world.timer.reachComboTimeTimerCount();
 	}
 }
