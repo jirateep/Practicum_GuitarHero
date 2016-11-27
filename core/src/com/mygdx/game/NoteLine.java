@@ -19,6 +19,10 @@ public class NoteLine {
 	public Texture noteComboImg;
 	public int color;
 	private boolean isCollected = false;
+	private int count = 0;
+	private int addPos = 0;
+	private int delPos = 0;
+	
 	
 	public NoteLine(int x,int [] songTime,Timer timer,int pushButtonKey,Texture [] texture,int color) {
 		this.x = x;
@@ -33,9 +37,10 @@ public class NoteLine {
 	}
 	
 	public void update() {
+		//printNote();
 		runNotes();
 		if(itsTimeToReserve(timer.getTime())) {
-			reserveNotes();		
+			addNote();		
 		}
 		buttonPress();
 	}
@@ -61,33 +66,22 @@ public class NoteLine {
 	}
 	
 	private float removeNearestnote() {
-		float distance;
-		float minDistance = Float.MAX_VALUE;
-		int position = -1;
-		for(int i=0;i<notes.length;i++) {
-			if(notes[i] != null) {
-				distance = notes[i].position.y - buttonYPosition;
-				//System.out.print("distance: " + distance);
-				if(distance <= 200 && distance < minDistance) {
-					minDistance = distance;
-					position = i;
-				}
+		float distance = Float.MAX_VALUE;
+		if(notes[delPos] != null) {
+			distance = notes[delPos].position.y - buttonYPosition;
+			if(distance <= 200){
+				notes[delPos].removeThis = true;
+				removeNote();
+				isCollected = true;
 			}
 		}
-		
-		if(position != -1) {
-			notes[position].removeThis = true;
-			removeNote(position);
-			isCollected = true;
-		}
-		//System.out.println(minDistance);
-		
-		return minDistance;
+		return distance;
 	}
 	
 	private boolean itsTimeToReserve(int time) {
-		for(int i=0;i<songTime.length;i++) {
-			if(time == songTime[i]) {
+		if(count < songTime.length) {
+			if(time == songTime[count]) {
+				count++;
 				return true;
 			}
 		}
@@ -98,34 +92,37 @@ public class NoteLine {
 		for(int i=0;i<notes.length;i++) {
 			if(notes[i] != null) {
 				notes[i].update();
-				removeNote(i);
+				removeNote();
 			}
 		}
 	}
 	
-	private void removeNote(int position) {
-		if(notes[position].removeThis) {
-			notes[position] = null;
+	private void removeNote() {
+		if(notes[delPos].removeThis) {
+			notes[delPos] = null;
+			delPos++;
+			if(delPos >= notes.length) {
+				delPos = 0;
+			}
 		}
+		
 	}
 	
-	private void reserveNotes() {
-		int pos = findExist();
-		if(pos >= 0) {
-			addNote(pos);
-		}
-	}
-	
-	private int findExist() {
-		for(int i=0;i<notes.length;i++) {
-			if(notes[i] == null)
-				return i;
-		}
-		return -1;
-	}
-	
-	private void addNote(int pos) {
+	private void addNote() {
 		//System.out.println(x);
-		notes[pos] = new Note(x,noteImg,noteComboImg,color);
+		notes[addPos] = new Note(x,noteImg,noteComboImg,color);
+		addPos++;
+		if(addPos >= notes.length) {
+			addPos = 0;
+		}
+	}
+	
+	private void printNote() {
+		System.out.print("[");
+		for(int i=0;i<notes.length;i++) {
+			if(notes[i]!=null) 
+				System.out.print(i+",");
+		}
+		System.out.println("]");
 	}
 }

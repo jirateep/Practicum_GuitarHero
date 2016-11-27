@@ -69,6 +69,8 @@ public class Note {
 	
 	private void deleting() {
 		if(position.y + noteImg.getHeight() < 0) {
+			World.score.nowComboString = World.score.comboStrings[Score.MISS];
+			
 			removeThis = true;
 			World.score.updateCombo(-1);
 		}

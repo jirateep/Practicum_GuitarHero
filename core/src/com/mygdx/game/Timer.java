@@ -10,7 +10,6 @@ public class Timer {
 	
 	public void update() {
 		timer++;
-		//System.out.println(timer);
 		reachComboTimeTimerCount();
 		stayComboStringTimer();
 	}

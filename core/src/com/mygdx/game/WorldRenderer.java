@@ -16,6 +16,7 @@ public class WorldRenderer {
 	BitmapFont g_gFont;
 	BitmapFont scoreFont;
 	BitmapFont comboFont;
+	BitmapFont comboStringFont;
 	
 	public WorldRenderer(World world) {
 		batch = new SpriteBatch();
@@ -44,10 +45,32 @@ public class WorldRenderer {
 	
 	public void drawNowComboString() {
 		if(World.score.nowComboString != null) {
+			updateNowComboStringFont();
 			String nowComboString = World.score.nowComboString;
-			float width = getFontWidth(y_oFont,nowComboString);
+			float width = getFontWidth(comboStringFont,nowComboString);
 			float xPosition = getCenterXPosition(width);
-			y_oFont.draw(batch,nowComboString,xPosition,GuitarHeroGame.HEIGHT- 100);
+			comboStringFont.draw(batch,nowComboString,xPosition,GuitarHeroGame.HEIGHT- 100);
+		}
+	}
+	
+	public void updateNowComboStringFont() {
+		String nowComboString = World.score.nowComboString;
+		switch(nowComboString) {
+			case "PERFECT":
+				comboStringFont = y_oFont;
+				break;
+			case "EXCELLENT":
+				comboStringFont = b_bFont;
+				break;
+			case "GOOD":
+				comboStringFont = g_gFont;
+				break;
+			case "BAD":
+				comboStringFont = p_pFont;
+				break;
+			case "MISS":
+				comboStringFont = p_pFont;
+				break;	
 		}
 	}
 	

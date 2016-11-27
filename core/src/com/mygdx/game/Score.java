@@ -100,6 +100,5 @@ public class Score {
 		} else {
 			world.timer.reachComboTimeStart = false;
 		}
-		//world.timer.reachComboTimeTimerCount();
 	}
 }
