@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class World {
@@ -22,7 +23,8 @@ public class World {
 	public Texture [][] eachLineImg;
 	public int [] xPosition;
 	public int [] keys = {Keys.D,Keys.F,Keys.G,Keys.H};
-	public int [][] song;
+	public Sound song;
+	public int [][] note;
 	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000,1010,1030,1090,1100,1120,1400,1420,1460,1500,1600,1700,1800,1880,1930,1950,1970,1990,2000};//{100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000};
 	public int [] songBlue = songRed;
 	public int [] songGreen = {50,150,250,350,450,550,650,750,850,950,1050,1070,1080,1150,1180,1210,1230,1260,1270,1310,1430,1470,1490,1510,1540,1580,1670,1840,1890,1900,1940,1980};
@@ -35,14 +37,22 @@ public class World {
 	
 	public static Score score;
 	
+	public static int halfDistance = 50;//5
+	public SongList songList;
+	public Texture bgImg;
+	public String name;
+	
+	
 	public World() {
 		
-		song = new int [NBOFCOLOR][];
-		song[RED] = songRed;
-		song[BLUE] = songBlue;
-		song[GREEN] = songGreen;
-		song[YELLOW] = songYellow;
-		
+		songList = new SongList(this);
+		songList.getSong();
+		//note = new int [NBOFCOLOR][];
+		//note[RED] = songRed;
+		//note[BLUE] = songBlue;
+		//note[GREEN] = songGreen;
+		//note[YELLOW] = songYellow;
+		song.play();
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
 		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
 		eachLineImg[RED][PRESS] = new Texture("redButtonFramePress.png");
@@ -64,14 +74,14 @@ public class World {
 		timer = new Timer();
 		
 		xPosition = new int [NBOFCOLOR];
-		xPosition[RED] = GuitarHeroGame.WIDTH/2-2*eachLineImg[BLUE][UNPRESS].getWidth() - 15;
-		xPosition[BLUE] = GuitarHeroGame.WIDTH/2-eachLineImg[BLUE][UNPRESS].getWidth() - 5;
-		xPosition[GREEN] = GuitarHeroGame.WIDTH/2 + 5;
-		xPosition[YELLOW] = GuitarHeroGame.WIDTH/2 + 15 + eachLineImg[BLUE][UNPRESS].getWidth();
+		xPosition[RED] = GuitarHeroGame.WIDTH/2-2*eachLineImg[BLUE][UNPRESS].getWidth() - 3 * halfDistance;
+		xPosition[BLUE] = GuitarHeroGame.WIDTH/2-eachLineImg[BLUE][UNPRESS].getWidth() - halfDistance;
+		xPosition[GREEN] = GuitarHeroGame.WIDTH/2 + halfDistance;
+		xPosition[YELLOW] = GuitarHeroGame.WIDTH/2 + 3 * halfDistance + eachLineImg[BLUE][UNPRESS].getWidth();
 
 		lines = new NoteLine [NBOFCOLOR];
 		for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i] = new NoteLine(xPosition[i],song[i],timer,keys[i],eachLineImg[i],i);
+			lines[i] = new NoteLine(xPosition[i],note[i],timer,keys[i],eachLineImg[i],i);
 		}
 		
 		dotImg = new Texture("dotResize.png");

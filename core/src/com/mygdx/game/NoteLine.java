@@ -37,7 +37,6 @@ public class NoteLine {
 	}
 	
 	public void update() {
-		//printNote();
 		runNotes();
 		if(itsTimeToReserve(timer.getTime())) {
 			addNote();		
@@ -115,14 +114,5 @@ public class NoteLine {
 		if(addPos >= notes.length) {
 			addPos = 0;
 		}
-	}
-	
-	private void printNote() {
-		System.out.print("[");
-		for(int i=0;i<notes.length;i++) {
-			if(notes[i]!=null) 
-				System.out.print(i+",");
-		}
-		System.out.println("]");
 	}
 }

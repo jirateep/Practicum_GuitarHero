@@ -62,18 +62,25 @@ public class DotLine {
 	}
 	
 	public float findXPosition(int line,float yPosition) {
-		float factor = (GuitarHeroGame.HEIGHT-yPosition)/GuitarHeroGame.HEIGHT;
+		float dotHalfWidth = dotImg.getWidth()/2;
+		float noteWidth = world.eachLineImg[World.RED][World.NOTE].getWidth();
+		float halfWidth = GuitarHeroGame.WIDTH/2;
+		float height = GuitarHeroGame.HEIGHT;
+		float factor = (height-yPosition)/height;
+		float wrong = 30;
+		float lastY = 2*World.halfDistance + noteWidth*factor + wrong;
+		float lastX = height -yPosition;
 		switch(line) {
 			case 0:
-				return GuitarHeroGame.WIDTH/2 - 40 - 2 * world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
+				return halfWidth - 2*lastX*lastY/height - dotHalfWidth;
 			case 1:
-				return GuitarHeroGame.WIDTH/2 - 20 - world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
+				return halfWidth - lastX*lastY/height - dotHalfWidth;
 			case 2:
-				return GuitarHeroGame.WIDTH/2 - dotImg.getWidth()/2;
+				return halfWidth - dotHalfWidth;
 			case 3:
-				return GuitarHeroGame.WIDTH/2 + 20 + world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
+				return halfWidth + lastX*lastY/height - dotHalfWidth;
 			case 4:
-				return GuitarHeroGame.WIDTH/2 + 40 + 2 * world.eachLineImg[World.RED][World.NOTE].getWidth()*factor - dotImg.getWidth()/2;
+				return halfWidth + 2*lastX*lastY/height - dotHalfWidth;
 			default:
 				break;
 		}

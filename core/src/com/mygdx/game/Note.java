@@ -48,18 +48,23 @@ public class Note {
 	
 	private float calXPosition(float y) {
 		float xPosition = 0;
+		float halfWidth = GuitarHeroGame.WIDTH/2;
+		float height = GuitarHeroGame.HEIGHT;
+		float lastY = height -y;
+		float lastX = World.halfDistance + nowNoteImg.getWidth()*factor/2;
+		float halfNoteWidthWithFactor = nowNoteImg.getWidth()*factor/2;
 		switch(color) {
 			case World.RED:
-				xPosition = GuitarHeroGame.WIDTH/2 - 15 - 2 * noteImg.getWidth()*factor;
+				xPosition = halfWidth - 3*lastX*lastY/height - halfNoteWidthWithFactor;
 				break;
 			case World.BLUE:
-				xPosition = GuitarHeroGame.WIDTH/2 - 5 - noteImg.getWidth()*factor;
+				xPosition = halfWidth - lastX*lastY/height - halfNoteWidthWithFactor;
 				break;
 			case World.GREEN:
-				xPosition = GuitarHeroGame.WIDTH/2 + 5;
+				xPosition = halfWidth + lastX*lastY/height - halfNoteWidthWithFactor;
 				break;
 			case World.YELLOW:
-				xPosition = GuitarHeroGame.WIDTH/2 + 15 + noteImg.getWidth()*factor;
+				xPosition = halfWidth + 3*lastX*lastY/height - halfNoteWidthWithFactor;
 				break;
 			default:
 				break;
