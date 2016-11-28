@@ -35,12 +35,22 @@ public class WorldRenderer {
 	public void render() {
 		
 		batch.begin();
+		//drawBgImg();
+		drawSongName();
 		drawDotLine();
 		drawNoteLines();
 		drawScore();
 		drawCombo();
 		drawNowComboString();
 		batch.end();
+	}
+	
+	private void drawSongName() {
+		w_gFont.draw(batch,world.name,100,700);
+	}
+	
+	private void drawBgImg() {
+		batch.draw(world.bgImg,0,0,GuitarHeroGame.WIDTH,GuitarHeroGame.HEIGHT);
 	}
 	
 	public void drawNowComboString() {

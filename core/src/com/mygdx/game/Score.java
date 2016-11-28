@@ -33,9 +33,9 @@ public class Score {
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 25;
-		distanceCriteria[EXCELLENT] = 50;
-		distanceCriteria[GOOD] = 100;
+		distanceCriteria[PERFECT] = 40;
+		distanceCriteria[EXCELLENT] = 60;
+		distanceCriteria[GOOD] = 120;
 		distanceCriteria[BAD] = 300;
 		distanceCriteria[MISS] = 1000;
 		
