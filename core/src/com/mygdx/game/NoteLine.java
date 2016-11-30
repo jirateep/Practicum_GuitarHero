@@ -22,11 +22,14 @@ public class NoteLine {
 	private int count = 0;
 	private int addPos = 0;
 	private int delPos = 0;
-	
-	
+	public boolean endNotes = false;
+	public int passed = 0;
+	private int countToEnd = 0;
+	private int maxCountToEnd = 300;
 	public NoteLine(int x,int [] songTime,Timer timer,int pushButtonKey,Texture [] texture,int color) {
 		this.x = x;
 		this.songTime = songTime;
+		//this.songTime = new int [] {100,120,130,140,170};
 		this.timer = timer;
 		this.pushButtonKey = pushButtonKey;
 		this.pushUnPressButtonImg = texture[World.UNPRESS];
@@ -42,6 +45,19 @@ public class NoteLine {
 			addNote();		
 		}
 		buttonPress();
+		isEnd();
+	}
+	
+	public void isEnd() {
+		//System.out.println(passed);
+		//System.out.println("len:" + songTime.length);
+		
+		if(passed > 5) {//== songTime.length) {
+			countToEnd++;
+			if(countToEnd == maxCountToEnd) {
+				endNotes = true;
+			}
+		}
 	}
 	
 	public void buttonPress() {
@@ -79,6 +95,9 @@ public class NoteLine {
 	
 	private boolean itsTimeToReserve(int time) {
 		if(count < songTime.length) {
+			//if(color == World.GREEN) {
+			//	System.out.println("green"+" "+time+" "+songTime[count]);
+			//}
 			if(time == songTime[count]) {
 				count++;
 				return true;
@@ -103,6 +122,7 @@ public class NoteLine {
 			if(delPos >= notes.length) {
 				delPos = 0;
 			}
+			passed++;
 		}
 		
 	}

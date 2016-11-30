@@ -18,7 +18,11 @@ public class WorldRenderer {
 	private BitmapFont scoreFont;
 	private BitmapFont comboFont;
 	private BitmapFont comboStringFont;
+	private BitmapFont endGameHeadFont;
+	private BitmapFont endGameDetailFont;
+	private BitmapFont [] endGameRankFont;
 	private Texture pathImg;
+	private int twinkle = 0;
 	
 	public WorldRenderer(World world) {
 		batch = new SpriteBatch();
@@ -30,23 +34,90 @@ public class WorldRenderer {
 		p_pFont = new BitmapFont(Gdx.files.internal("pinkPurpleArcade.fnt"));
 		w_gFont = new BitmapFont(Gdx.files.internal("whiteGrayArcade.fnt"));
 		g_gFont = new BitmapFont(Gdx.files.internal("greenDarkGreenArcade.fnt"));
+		scoreFont = new BitmapFont(Gdx.files.internal("scoreArcade.fnt"));
 		
-		scoreFont = w_gFont;
-		//comboFont = y_oFont;
+		endGameHeadFont = new BitmapFont(Gdx.files.internal("endHeadArcade.fnt"));
+		endGameDetailFont = new BitmapFont(Gdx.files.internal("endDetailArcade.fnt"));
+		
+		endGameRankFont = new BitmapFont [6];
+		endGameRankFont[0] = new BitmapFont(Gdx.files.internal("ssArcade.fnt"));
+		endGameRankFont[1] = new BitmapFont(Gdx.files.internal("aArcade.fnt"));
 	}
 	
 	public void render() {
 		
 		batch.begin();
-		drawBgImg();
-		drawPath();
-		drawSongName();
-		drawDotLine();
-		drawNoteLines();
-		drawScore();
-		drawCombo();
-		drawNowComboString();
+		if(!world.endingSong()) {
+			drawBgImg();
+			drawPath();
+			drawSongName();
+			drawDotLine();
+			drawNoteLines();
+			drawScore();
+			drawCombo();
+			drawNowComboString();
+		} else {
+			drawEndGame();
+		}
 		batch.end();
+	}
+	
+	private void drawEndGame() {
+		drawEndScore();
+		drawEndRank();
+		drawEndCombo();
+		drawString();
+	}
+	
+	private void drawString() {
+		String string = "PRESS ANYKEYS TO CONTINUE";
+		if(twinkle % 40 > 19) {
+			float width = getFontWidth(endGameDetailFont,string);
+			float xPosition = getCenterXPosition(width);
+			endGameDetailFont.draw(batch,string,xPosition,100);
+		}
+		twinkle++;
+	}
+	
+	private void drawEndMaxCombo(float xPos,float yPos) {
+		String maxCombo = "MAXCOMBO    " + World.score.maxCombo;
+		endGameDetailFont.draw(batch,maxCombo,xPos,yPos);
+	}
+	
+	private void drawEndCombo() {
+		String [] numCombo = {"PERFECT     "+World.score.countCombo[0],
+							  "EXCELLENT   "+World.score.countCombo[1],
+							  "GOOD        "+World.score.countCombo[2],
+							  "BAD         "+World.score.countCombo[3],
+							  "MISS        "+World.score.countCombo[4]};
+		int i = 0;
+		float width = getFontWidth(endGameDetailFont,numCombo[0]);
+		float xPosition = getCenterXPosition(width)-200;
+		for(;i<numCombo.length;i++) {
+			endGameDetailFont.draw(batch,numCombo[i],xPosition,GuitarHeroGame.HEIGHT-280-i*60);
+		}
+		drawEndMaxCombo(xPosition,GuitarHeroGame.HEIGHT-280 - i*60);
+	}
+	
+	private void drawEndRank() {
+		
+		if(world.endMenu.rank != "") {
+			String rank = world.endMenu.rank;
+			float width = getFontWidth(endGameRankFont[1],rank);
+			float height = getFontHeight(endGameRankFont[1],rank);
+			float xPosition = getRightXPosition(width) - 450;
+			float yPosition = getTopYPosition(height) - 150;
+			endGameRankFont[1].draw(batch,rank,xPosition,yPosition);
+		}
+	}
+	
+	private void drawEndScore() {
+		String scoreString = "SCORE " + world.endMenu.scoreString;
+		float width = getFontWidth(endGameHeadFont,scoreString);
+		float height = getFontHeight(endGameHeadFont,scoreString);
+		float xPosition = getCenterXPosition(width)- 200;
+		float yPosition = getTopYPosition(height) - 150;
+		endGameHeadFont.draw(batch,scoreString,xPosition,yPosition);
 	}
 	
 	private void drawPath() {
@@ -54,7 +125,11 @@ public class WorldRenderer {
 	}
 	
 	private void drawSongName() {
-		w_gFont.draw(batch,world.name,100,700);
+		float width = getFontWidth(scoreFont,world.name);
+		float xPosition = getRightXPosition(width)-40;
+		float height = getFontHeight(scoreFont,world.name);
+		float yPosition = getTopYPosition(height)-40;
+		scoreFont.draw(batch,world.name,xPosition,yPosition);
 	}
 	
 	private void drawBgImg() {
@@ -67,7 +142,7 @@ public class WorldRenderer {
 			String nowComboString = World.score.nowComboString;
 			float width = getFontWidth(comboStringFont,nowComboString);
 			float xPosition = getCenterXPosition(width);
-			comboStringFont.draw(batch,nowComboString,xPosition,GuitarHeroGame.HEIGHT- 100);
+			comboStringFont.draw(batch,nowComboString,xPosition,GuitarHeroGame.HEIGHT- 300);
 		}
 	}
 	
@@ -100,10 +175,12 @@ public class WorldRenderer {
 	}
 	
 	public void drawScore() {
-		String scoreString = "score: " + World.score.score;
-		float width = getFontWidth(scoreFont,scoreString);
-		float xPosition = getRightXPosition(width) - 50;
-		scoreFont.draw(batch,scoreString,xPosition,GuitarHeroGame.HEIGHT- 250);
+		String scoreString = String.format("%07d", World.score.score);
+		float height = getFontHeight(scoreFont,scoreString);
+		float yPosition = getTopYPosition(height) - 40;
+		//float width = getFontWidth(scoreFont,scoreString);
+		//float xPosition = getRightXPosition(width) - 50;
+		scoreFont.draw(batch,scoreString,40,yPosition);
 	}
 	
 	public void drawCombo() { 
@@ -112,7 +189,7 @@ public class WorldRenderer {
 			String comboString = World.score.combo + " combo";
 			float width = getFontWidth(comboFont,comboString);
 			float xPosition = getCenterXPosition(width);
-			comboFont.draw(batch,comboString,xPosition,GuitarHeroGame.HEIGHT- 150);
+			comboFont.draw(batch,comboString,xPosition,GuitarHeroGame.HEIGHT- 350);
 		}
 	}
 	
@@ -137,15 +214,28 @@ public class WorldRenderer {
 		return ( GuitarHeroGame.WIDTH - objWidth )/2;
 	}
 	
+	public float getTopYPosition(float objHeight) {
+		return GuitarHeroGame.HEIGHT - objHeight;
+	}
+	
+	public float getCenterYPosition(float objHeight) {
+		return ( GuitarHeroGame.HEIGHT - objHeight )/2;
+	}
+	
 	public float getFontWidth(BitmapFont font, String str) {
 		GlyphLayout layout = new GlyphLayout(font, str);
 		return layout.width;
 	}
 	
+	public float getFontHeight(BitmapFont font, String str) {
+		GlyphLayout layout = new GlyphLayout(font, str);
+		return layout.height;
+	}
+	
 	public void drawDotLine() {
 		for(int i=0;i<DotLine.NBOFDOT;i++) {
 			for(int j=0;j<DotLine.NBOFLINE;j++) {
-				if(world.dotLine.dotLine[i][j] != null && world.dotLine.dotLine[i][j].y <= GuitarHeroGame.HEIGHT * 3 / 4) {
+				if(world.dotLine.dotLine[i][j] != null && world.dotLine.dotLine[i][j].y <= GuitarHeroGame.HEIGHT * 19 / 20) {
 					batch.draw(world.dotLine.dotImg,world.dotLine.dotLine[i][j].x,world.dotLine.dotLine[i][j].y);
 				}
 			}
@@ -154,7 +244,7 @@ public class WorldRenderer {
 	
 	public void drawNoteLine(Note [] notes) {
 		for(int i=notes.length - 1;i >= 0;i--) {
-			if(notes[i] != null && notes[i].position.y <= GuitarHeroGame.HEIGHT * 3 / 4) {
+			if(notes[i] != null && notes[i].position.y <= GuitarHeroGame.HEIGHT * 19 / 20) {
 				float nowWidth = notes[i].nowNoteImg.getWidth() * notes[i].factor;
 				float nowHeight = notes[i].nowNoteImg.getHeight() * notes[i].factor;
 				batch.draw(notes[i].nowNoteImg, notes[i].position.x,notes[i].position.y, nowWidth, nowHeight);

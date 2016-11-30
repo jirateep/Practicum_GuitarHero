@@ -25,10 +25,6 @@ public class World {
 	public int [] keys = {Keys.D,Keys.F,Keys.G,Keys.H};
 	public Sound song;
 	public int [][] note;
-	public int [] songRed = {100,200,300,400,500,600,700,800,900,1000,1010,1030,1090,1100,1120,1400,1420,1460,1500,1600,1700,1800,1880,1930,1950,1970,1990,2000};//{100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000};
-	public int [] songBlue = songRed;
-	public int [] songGreen = {50,150,250,350,450,550,650,750,850,950,1050,1070,1080,1150,1180,1210,1230,1260,1270,1310,1430,1470,1490,1510,1540,1580,1670,1840,1890,1900,1940,1980};
-	public int [] songYellow = songGreen;
 	
 	public Timer timer;
 	public static int speed = 10;
@@ -42,15 +38,14 @@ public class World {
 	public Texture bgImg;
 	public String name;
 	
+	public EndMenu endMenu;
+	
+	public int maxScore;
+	
 	public World() {
 		
 		songList = new SongList(this);
 		songList.getSong();
-		//note = new int [NBOFCOLOR][];
-		//note[RED] = songRed;
-		//note[BLUE] = songBlue;
-		//note[GREEN] = songGreen;
-		//note[YELLOW] = songYellow;
 		song.play();
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
 		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
@@ -87,14 +82,42 @@ public class World {
 		dotLine = new DotLine(dotImg,this);
 		
 		score = new Score(this);
+		endMenu = new EndMenu(this);
 	}
 	
 	public void update(float delta) {
-		for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i].update();
+		if(!endingSong()) {
+			for(int i=0;i<NBOFCOLOR;i++) {
+				lines[i].update();
+			}
+			timer.update();
+			dotLine.update();
+			score.updateReachComboTime();
+			//printPass();
+			endMenu.update();
+		} else {
+			
 		}
-		timer.update();
-		dotLine.update();
-		score.updateReachComboTime();
+		endMenu.update();
+	}
+	
+	public void printPass() {
+		for(int i=0;i<NBOFCOLOR;i++) {
+			System.out.print(lines[i].passed + " " + lines[i].songTime.length + " ");
+		}
+		System.out.println();
+	}
+	
+	public boolean endingSong() {
+		int countEnd = 0;
+		for(int i=0;i<NBOFCOLOR;i++) {
+			if(lines[i].endNotes) {
+				countEnd++;
+			}
+		}
+		if(countEnd == NBOFCOLOR) {
+			return true;
+		}
+		return false;
 	}
 }

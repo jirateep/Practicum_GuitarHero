@@ -7,6 +7,7 @@ public class Score {
 
 	public int score = 0;
 	public int combo = 0;
+	public int maxCombo = 0;
 	public static final int PERFECT = 0;
 	public static final int EXCELLENT = 1;
 	public static final int GOOD = 2;
@@ -20,23 +21,23 @@ public class Score {
 	public String nowComboString = null;
 	public int comboScore = 10;
 	public boolean reachComboTime = false;
-	private int comboTimeFactor = 2;
+	private double comboTimeFactor = 2;
 	private int reachComboTimeNumber = 100;
 	private World world;
 	
 	public Score(World world) {
 		scoreCriteria = new int [NBOFCRITERIA];
-		scoreCriteria[PERFECT] = 150;
-		scoreCriteria[EXCELLENT] = 100;
-		scoreCriteria[GOOD] = 50;
-		scoreCriteria[BAD] = 20;
+		scoreCriteria[PERFECT] = 100;
+		scoreCriteria[EXCELLENT] = 80;
+		scoreCriteria[GOOD] = 40;
+		scoreCriteria[BAD] = 10;
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 40;
+		distanceCriteria[PERFECT] = 30;
 		distanceCriteria[EXCELLENT] = 60;
-		distanceCriteria[GOOD] = 120;
-		distanceCriteria[BAD] = 300;
+		distanceCriteria[GOOD] = 80;
+		distanceCriteria[BAD] = 250;
 		distanceCriteria[MISS] = 1000;
 		
 		comboStrings = new String [NBOFCRITERIA];
@@ -54,16 +55,16 @@ public class Score {
 		int nowCombo = cirteriaScore(distance);
 		increaseScore(nowCombo);
 		updateCombo(nowCombo);
-		System.out.println("score: " + score);
-		System.out.println("combo: " + combo);
+		//System.out.println("score: " + score);
+		//System.out.println("combo: " + combo);
 	}
 
 	public void increaseScore(int nowCombo) {
 		if(nowCombo >= PERFECT && nowCombo <= MISS) {
 			if(reachComboTime) {
-				score += (scoreCriteria[nowCombo] + combo * comboScore) * comboTimeFactor;
+				score += (int)((scoreCriteria[nowCombo] + combo * comboScore) * comboTimeFactor);
 			} else {
-				score += scoreCriteria[nowCombo] + combo * comboScore;
+				score += (int)(scoreCriteria[nowCombo] + combo * comboScore);
 			}
 			nowComboString = comboStrings[nowCombo];
 			world.timer.stayComboTimer = 0;
@@ -71,17 +72,18 @@ public class Score {
 	}
 	
 	public void updateCombo(int nowCombo) {
-		System.out.println("pass");
+		//System.out.println("pass");
 		if(nowCombo >= PERFECT && nowCombo <= GOOD) {
 			combo++;
 		} else {
 			combo = 0;
 		}
+		maxCombo = Math.max(maxCombo, combo);
 	}
 	
 	public int cirteriaScore(float distance) {
 		int criteria = -1;
-		System.out.println("distance: " + distance);
+		//System.out.println("distance: " + distance);
 		for(int i=0;i<distanceCriteria.length;i++) {
 			if(distance <= distanceCriteria[i]) {
 				criteria = i;
@@ -89,7 +91,7 @@ public class Score {
 				break;
 			}
 		}
-		System.out.println("this combo " + criteria);
+		//System.out.println("this combo " + criteria);
 		return criteria;
 	}
 	
