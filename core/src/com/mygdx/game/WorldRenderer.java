@@ -1,27 +1,30 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldRenderer {
 	
-	SpriteBatch batch;
-	World world;
-	BitmapFont y_oFont;
-	BitmapFont b_bFont;
-	BitmapFont p_pFont;
-	BitmapFont w_gFont;
-	BitmapFont g_gFont;
-	BitmapFont scoreFont;
-	BitmapFont comboFont;
-	BitmapFont comboStringFont;
+	private SpriteBatch batch;
+	private World world;
+	private BitmapFont y_oFont;
+	private BitmapFont b_bFont;
+	private BitmapFont p_pFont;
+	private BitmapFont w_gFont;
+	private BitmapFont g_gFont;
+	private BitmapFont scoreFont;
+	private BitmapFont comboFont;
+	private BitmapFont comboStringFont;
+	private Texture pathImg;
 	
 	public WorldRenderer(World world) {
 		batch = new SpriteBatch();
 		this.world = world;
 		
+		pathImg = new Texture("path.png");
 		y_oFont = new BitmapFont(Gdx.files.internal("yellowOrangeArcade.fnt"));
 		b_bFont = new BitmapFont(Gdx.files.internal("blueDarkBlueArcade.fnt"));
 		p_pFont = new BitmapFont(Gdx.files.internal("pinkPurpleArcade.fnt"));
@@ -35,7 +38,8 @@ public class WorldRenderer {
 	public void render() {
 		
 		batch.begin();
-		//drawBgImg();
+		drawBgImg();
+		drawPath();
 		drawSongName();
 		drawDotLine();
 		drawNoteLines();
@@ -43,6 +47,10 @@ public class WorldRenderer {
 		drawCombo();
 		drawNowComboString();
 		batch.end();
+	}
+	
+	private void drawPath() {
+		batch.draw(pathImg,354,0);
 	}
 	
 	private void drawSongName() {

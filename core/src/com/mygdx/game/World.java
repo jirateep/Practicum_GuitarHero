@@ -42,7 +42,6 @@ public class World {
 	public Texture bgImg;
 	public String name;
 	
-	
 	public World() {
 		
 		songList = new SongList(this);
