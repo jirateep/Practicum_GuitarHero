@@ -21,6 +21,7 @@ public class WorldRenderer {
 	private BitmapFont endGameHeadFont;
 	private BitmapFont endGameDetailFont;
 	private BitmapFont [] endGameRankFont;
+	private BitmapFont rankFont;
 	private Texture pathImg;
 	private int twinkle = 0;
 	
@@ -42,6 +43,10 @@ public class WorldRenderer {
 		endGameRankFont = new BitmapFont [6];
 		endGameRankFont[0] = new BitmapFont(Gdx.files.internal("ssArcade.fnt"));
 		endGameRankFont[1] = new BitmapFont(Gdx.files.internal("aArcade.fnt"));
+		endGameRankFont[2] = new BitmapFont(Gdx.files.internal("bArcade.fnt"));
+		endGameRankFont[3] = new BitmapFont(Gdx.files.internal("cArcade.fnt"));
+		endGameRankFont[4] = new BitmapFont(Gdx.files.internal("dArcade.fnt"));
+		rankFont = endGameRankFont[0];
 	}
 	
 	public void render() {
@@ -100,14 +105,35 @@ public class WorldRenderer {
 	}
 	
 	private void drawEndRank() {
-		
 		if(world.endMenu.rank != "") {
 			String rank = world.endMenu.rank;
-			float width = getFontWidth(endGameRankFont[1],rank);
-			float height = getFontHeight(endGameRankFont[1],rank);
+			chooseRankFont(rank);
+			float width = getFontWidth(rankFont,rank);
+			float height = getFontHeight(rankFont,rank);
 			float xPosition = getRightXPosition(width) - 450;
 			float yPosition = getTopYPosition(height) - 150;
-			endGameRankFont[1].draw(batch,rank,xPosition,yPosition);
+			rankFont.draw(batch,rank,xPosition,yPosition);
+		}
+	}
+	
+	private void chooseRankFont(String rank) {
+		switch(rank) {
+			case "SS":
+			case "S":
+				rankFont = endGameRankFont[0];
+				break;
+			case "A":
+				rankFont = endGameRankFont[1];
+				break;
+			case "B":
+				rankFont = endGameRankFont[2];
+				break;
+			case "C":
+				rankFont = endGameRankFont[3];
+				break;
+			case "D":
+				rankFont = endGameRankFont[4];
+				break;
 		}
 	}
 	

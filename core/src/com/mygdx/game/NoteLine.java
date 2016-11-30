@@ -52,7 +52,7 @@ public class NoteLine {
 		//System.out.println(passed);
 		//System.out.println("len:" + songTime.length);
 		
-		if(passed > 5) {//== songTime.length) {
+		if(passed == songTime.length) {
 			countToEnd++;
 			if(countToEnd == maxCountToEnd) {
 				endNotes = true;

@@ -1,15 +1,15 @@
 info face="Press Start 2P" size=200 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
 common lineHeight=200 base=200 scaleW=512 scaleH=512 pages=10 packed=0
-page id=0 file="ssArcade1.png"
-page id=1 file="ssArcade2.png"
-page id=2 file="ssArcade3.png"
-page id=3 file="ssArcade4.png"
-page id=4 file="ssArcade5.png"
-page id=5 file="ssArcade6.png"
-page id=6 file="ssArcade7.png"
-page id=7 file="ssArcade8.png"
-page id=8 file="ssArcade9.png"
-page id=9 file="ssArcade10.png"
+page id=0 file="dArcade1.png"
+page id=1 file="dArcade2.png"
+page id=2 file="dArcade3.png"
+page id=3 file="dArcade4.png"
+page id=4 file="dArcade5.png"
+page id=5 file="dArcade6.png"
+page id=6 file="dArcade7.png"
+page id=7 file="dArcade8.png"
+page id=8 file="dArcade9.png"
+page id=9 file="dArcade10.png"
 chars count=98
 char id=10      x=0    y=0    width=0    height=0    xoffset=-2   yoffset=0    xadvance=0    page=0    chnl=0 
 char id=32      x=0    y=0    width=0    height=0    xoffset=-2   yoffset=0    xadvance=200  page=0    chnl=0 
