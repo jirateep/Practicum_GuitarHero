@@ -112,6 +112,9 @@ public class WorldRenderer {
 			float height = getFontHeight(rankFont,rank);
 			float xPosition = getRightXPosition(width) - 450;
 			float yPosition = getTopYPosition(height) - 150;
+			if(rank == "SS") {
+				xPosition += 50;
+			}
 			rankFont.draw(batch,rank,xPosition,yPosition);
 		}
 	}
@@ -147,7 +150,7 @@ public class WorldRenderer {
 	}
 	
 	private void drawPath() {
-		batch.draw(pathImg,354,0);
+		batch.draw(pathImg,-1,0);
 	}
 	
 	private void drawSongName() {

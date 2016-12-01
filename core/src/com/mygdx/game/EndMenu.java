@@ -19,7 +19,7 @@ public class EndMenu {
 		if(world.endingSong()) {
 			if(count != finalScore) {
 				//System.out.println(count);
-				int now = (int)(Math.random()*300)+300;
+				int now = (int)(Math.random()*1500)+2000;
 				count+=now;
 				if(count > finalScore) {
 					count = finalScore;

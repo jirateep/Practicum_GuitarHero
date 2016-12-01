@@ -73,8 +73,8 @@ public class SongList {
 				
 			}
 		}
-		//System.out.println("maxScore: " + (((allCount-100)*100+(allCount-100)*(allCount-99)*10/2)*2+(100*100+10*100*101/2)));
-		world.maxScore = ((allCount-100)*100+(allCount-100)*(allCount-99)*10/2)*2+(100*100+10*100*101/2);
+		world.maxScore = ((allCount-100)*100)*2+(100*100)+30*allCount;
+		System.out.println(world.maxScore);;
 		return nowSong;
 	}
 }
