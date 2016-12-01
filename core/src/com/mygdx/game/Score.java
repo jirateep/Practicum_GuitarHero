@@ -34,10 +34,10 @@ public class Score {
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 30;
-		distanceCriteria[EXCELLENT] = 60;
-		distanceCriteria[GOOD] = 80;
-		distanceCriteria[BAD] = 250;
+		distanceCriteria[PERFECT] = 40;
+		distanceCriteria[EXCELLENT] = 80;
+		distanceCriteria[GOOD] = 150;
+		distanceCriteria[BAD] = 300;
 		distanceCriteria[MISS] = 1000;
 		
 		comboStrings = new String [NBOFCRITERIA];

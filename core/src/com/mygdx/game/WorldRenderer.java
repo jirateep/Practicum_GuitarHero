@@ -113,7 +113,7 @@ public class WorldRenderer {
 			float xPosition = getRightXPosition(width) - 450;
 			float yPosition = getTopYPosition(height) - 150;
 			if(rank == "SS") {
-				xPosition += 50;
+				xPosition += 100;
 			}
 			rankFont.draw(batch,rank,xPosition,yPosition);
 		}
