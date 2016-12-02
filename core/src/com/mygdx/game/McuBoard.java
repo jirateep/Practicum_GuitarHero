@@ -1,8 +1,15 @@
 package com.mygdx.game;
 
-import java.nio.*;
-import java.util.*;
-import org.usb4java.*;
+import java.nio.ByteBuffer;
+import java.util.LinkedList;
+
+import org.usb4java.Context;
+import org.usb4java.Device;
+import org.usb4java.DeviceDescriptor;
+import org.usb4java.DeviceHandle;
+import org.usb4java.DeviceList;
+import org.usb4java.LibUsb;
+import org.usb4java.LibUsbException;
 
 public class McuBoard implements AutoCloseable
 {
