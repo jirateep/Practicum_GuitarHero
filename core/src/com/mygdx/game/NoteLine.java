@@ -19,9 +19,9 @@ public class NoteLine {
 	public Texture noteComboImg;
 	public int color;
 	private boolean isCollected = false;
-	private int count = 0;
-	private int addPos = 0;
-	private int delPos = 0;
+	private int count;
+	private int addPos;
+	private int delPos;
 	public boolean endNotes = false;
 	public int passed = 0;
 	private int countToEnd = 0;
@@ -40,6 +40,9 @@ public class NoteLine {
 		this.noteComboImg = texture[World.NOTECOMBO];
 		this.color = color;
 		this.hardWare = hardWare;
+		count = 0;
+		addPos = 0;
+		delPos = 0;
 	}
 	
 	public void update() {
@@ -52,8 +55,6 @@ public class NoteLine {
 	}
 	
 	public void isEnd() {
-		//System.out.println(passed);
-		//System.out.println("len:" + songTime.length);
 		
 		if(passed == songTime.length) {
 			countToEnd++;
@@ -107,9 +108,6 @@ public class NoteLine {
 	
 	private boolean itsTimeToReserve(int time) {
 		if(count < songTime.length) {
-			//if(color == World.GREEN) {
-			//	System.out.println("green"+" "+time+" "+songTime[count]);
-			//}
 			if(time == songTime[count]) {
 				count++;
 				return true;
@@ -140,7 +138,6 @@ public class NoteLine {
 	}
 	
 	private void addNote() {
-		//System.out.println(x);
 		notes[addPos] = new Note(x,noteImg,noteComboImg,color);
 		addPos++;
 		if(addPos >= notes.length) {

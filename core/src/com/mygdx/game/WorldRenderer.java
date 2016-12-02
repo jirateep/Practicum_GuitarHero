@@ -22,6 +22,7 @@ public class WorldRenderer {
 	private BitmapFont endGameDetailFont;
 	private BitmapFont [] endGameRankFont;
 	private BitmapFont rankFont;
+	private BitmapFont startGameHeadFont;
 	private Texture pathImg;
 	private int twinkle = 0;
 	
@@ -39,6 +40,7 @@ public class WorldRenderer {
 		
 		endGameHeadFont = new BitmapFont(Gdx.files.internal("endHeadArcade.fnt"));
 		endGameDetailFont = new BitmapFont(Gdx.files.internal("endDetailArcade.fnt"));
+		startGameHeadFont = endGameHeadFont;
 		
 		endGameRankFont = new BitmapFont [6];
 		endGameRankFont[0] = new BitmapFont(Gdx.files.internal("ssArcade.fnt"));
@@ -47,24 +49,50 @@ public class WorldRenderer {
 		endGameRankFont[3] = new BitmapFont(Gdx.files.internal("cArcade.fnt"));
 		endGameRankFont[4] = new BitmapFont(Gdx.files.internal("dArcade.fnt"));
 		rankFont = endGameRankFont[0];
+		
 	}
 	
 	public void render() {
 		
 		batch.begin();
-		if(!world.endingSong()) {
-			drawBgImg();
-			drawPath();
-			drawSongName();
-			drawDotLine();
-			drawNoteLines();
-			drawScore();
-			drawCombo();
-			drawNowComboString();
-		} else {
-			drawEndGame();
+		if(world.startingSong) {
+			drawHomeMenu();
+		}else {
+			if(!world.endingSong) {
+				drawBgImg();
+				drawPath();
+				drawSongName();
+				drawDotLine();
+				drawNoteLines();
+				drawScore();
+				drawCombo();
+				drawNowComboString();
+			} else {
+				drawEndGame();
+			}
 		}
 		batch.end();
+	}
+	
+	private void drawHomeMenu() {
+		drawSongNameForHome();
+		drawCreatedBy();
+	}
+	
+	private void drawCreatedBy() {
+		String str = "created by Jirateep Tantisuwankul,Peerapong Tawantaweekit";
+		float width = getFontWidth(w_gFont,str);
+		float xPosition = getRightXPosition(width)-30;
+		w_gFont.draw(batch,str,xPosition,30);
+	}
+	
+	private void drawSongNameForHome() {
+		String songName = world.homeMenu.songList[world.homeMenu.selection];
+		float width = getFontWidth(startGameHeadFont,songName);
+		float height = getFontHeight(startGameHeadFont,songName);
+		float xPosition = getCenterXPosition(width);
+		float yPosition = getCenterYPosition(height);
+		startGameHeadFont.draw(batch,songName,xPosition,yPosition);
 	}
 	
 	private void drawEndGame() {

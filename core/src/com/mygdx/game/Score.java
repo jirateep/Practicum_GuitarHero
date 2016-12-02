@@ -19,7 +19,7 @@ public class Score {
 	public int [] countCombo;
 	public String [] comboStrings;
 	public String nowComboString = null;
-	public int comboScore = 10;
+	public int comboScore = 5;
 	public boolean reachComboTime = false;
 	private double comboTimeFactor = 2;
 	private int reachComboTimeNumber = 100;
@@ -34,7 +34,7 @@ public class Score {
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 40;
+		distanceCriteria[PERFECT] = 50;
 		distanceCriteria[EXCELLENT] = 80;
 		distanceCriteria[GOOD] = 150;
 		distanceCriteria[BAD] = 300;

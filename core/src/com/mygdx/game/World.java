@@ -27,7 +27,7 @@ public class World {
 	public int [][] note;
 	
 	public Timer timer;
-	public static int speed = 15;
+	public static int speed;
 	public Texture dotImg;
 	public DotLine dotLine;
 	
@@ -39,16 +39,21 @@ public class World {
 	public String name;
 	
 	public EndMenu endMenu;
+	public HomeMenu homeMenu;
+	
+	public boolean startingSong = true;
+	public boolean endingSong = false;
 	
 	public int maxScore;
 	
 	public HardWare hardWare;
 	
 	public World(HardWare hardWare) {
-		
+	
 		songList = new SongList(this);
-		songList.getSong();
-		song.play();
+		homeMenu = new HomeMenu(this);
+		//songList.getSong(SongList.REDO);
+		//song.play();
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
 		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
 		eachLineImg[RED][PRESS] = new Texture("redButtonFramePress.png");
@@ -78,9 +83,9 @@ public class World {
 		this.hardWare = hardWare;
 		
 		lines = new NoteLine [NBOFCOLOR];
-		for(int i=0;i<NBOFCOLOR;i++) {
+		/*for(int i=0;i<NBOFCOLOR;i++) {
 			lines[i] = new NoteLine(xPosition[i],note[i],timer,keys[i],eachLineImg[i],i,hardWare);
-		}
+		}*/
 		
 		dotImg = new Texture("dotResize.png");
 		dotLine = new DotLine(dotImg,this);
@@ -90,19 +95,24 @@ public class World {
 	}
 	
 	public void update(float delta) {
-		if(!endingSong()) {
-			for(int i=0;i<NBOFCOLOR;i++) {
-				lines[i].update();
-			}
-			timer.update();
-			dotLine.update();
-			score.updateReachComboTime();
-			//printPass();
-			endMenu.update();
+		hardWare.update();
+		if(startingSong) {
+			homeMenu.update();
 		} else {
-			
+			if(!endingSong) {
+				for(int i=0;i<NBOFCOLOR;i++) {
+					lines[i].update();
+				}
+				timer.update();
+				dotLine.update();
+				score.updateReachComboTime();
+				//printPass();
+				//endMenu.update();
+				isEnd();
+			} else {
+				endMenu.update();
+			}
 		}
-		endMenu.update();
 	}
 	
 	public void printPass() {
@@ -112,16 +122,19 @@ public class World {
 		System.out.println();
 	}
 	
-	public boolean endingSong() {
+	public void isEnd() {
 		int countEnd = 0;
 		for(int i=0;i<NBOFCOLOR;i++) {
-			if(lines[i].endNotes) {
+			if(lines[i] != null && lines[i].endNotes) {
 				countEnd++;
 			}
 		}
+		//System.out.println(countEnd);
 		if(countEnd == NBOFCOLOR) {
-			return true;
+			endingSong = true;
+			return;
 		}
-		return false;
+		//System.out.println("justContinue");
+		endingSong = false;
 	}
 }

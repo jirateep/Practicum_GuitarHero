@@ -7,6 +7,8 @@ public class HardWare {
 	public Device[] devices;
 	public boolean [] isSwitchPress;
 	public boolean [] LED;
+	public boolean foundHardWare;
+	
 	public void initHardWare() {//throws Exception{
 		isSwitchPress = new boolean [World.NBOFCOLOR];
 		LED = new boolean [World.NBOFCOLOR];
@@ -21,10 +23,12 @@ public class HardWare {
         {	
         	if (devices.length == 0) {
         		System.out.format("** Practicum board not found **\n");
+        		foundHardWare = false;
         		return;
         	}
         	else {
         		System.out.format("** Found %d practicum board(s) **\n", devices.length);
+        		foundHardWare = true;
         	}
         	
         	peri = new McuWithPeriBoard(devices[0]);
@@ -41,12 +45,21 @@ public class HardWare {
 	
 	public void update() {
 		updateSwitch();
+		//printSwitch();
 		//updateLED();
 	}
 	
 	public void updateSwitch() {
+		if(foundHardWare) {
+			for(int i=0;i<World.NBOFCOLOR;i++) {
+				isSwitchPress[i] = peri.getSwitch(i+1);
+			}
+		}
+	}
+	
+	public void printSwitch() {
 		for(int i=0;i<World.NBOFCOLOR;i++) {
-			isSwitchPress[i] = peri.getSwitch(i+1);
+			System.out.println(isSwitchPress[i]+"\t");
 		}
 	}
 	
