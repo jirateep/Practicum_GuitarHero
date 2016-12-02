@@ -27,7 +27,7 @@ public class World {
 	public int [][] note;
 	
 	public Timer timer;
-	public static int speed = 10;
+	public static int speed = 15;
 	public Texture dotImg;
 	public DotLine dotLine;
 	

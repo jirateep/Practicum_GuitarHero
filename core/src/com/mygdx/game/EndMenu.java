@@ -8,7 +8,7 @@ public class EndMenu {
 	public String rank = "";
 	
 	public int maxScore;
-	public float [] criteria = {95,90,80,70,50};//SS S A B C D
+	public float [] criteria = {99,95,80,70,50};//SS S A B C D
 	
 	public EndMenu(World world) {
 		this.world = world;
