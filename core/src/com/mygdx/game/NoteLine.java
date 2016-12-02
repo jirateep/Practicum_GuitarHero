@@ -26,7 +26,9 @@ public class NoteLine {
 	public int passed = 0;
 	private int countToEnd = 0;
 	private int maxCountToEnd = 300;
-	public NoteLine(int x,int [] songTime,Timer timer,int pushButtonKey,Texture [] texture,int color) {
+	private HardWare hardWare;
+	
+	public NoteLine(int x,int [] songTime,Timer timer,int pushButtonKey,Texture [] texture,int color,HardWare hardWare) {
 		this.x = x;
 		this.songTime = songTime;
 		//this.songTime = new int [] {100,120,130,140,170};
@@ -37,6 +39,7 @@ public class NoteLine {
 		this.noteImg = texture[World.NOTE];
 		this.noteComboImg = texture[World.NOTECOMBO];
 		this.color = color;
+		this.hardWare = hardWare;
 	}
 	
 	public void update() {
@@ -68,16 +71,25 @@ public class NoteLine {
 		oldIsPress = isPress;
 	}
 
+	public boolean updateSwitch() {
+		return hardWare.isSwitchPress[color];
+	}
+	
 	private boolean isButtonPress() {
-		if(Gdx.input.isKeyPressed(pushButtonKey) && !isCollected) {
+		if(isPressing() && !isCollected && !oldIsPress) {
 			isPress = true;
+			
+			isCollected = true;
 			return true;
 		}
-		if(!Gdx.input.isKeyPressed(pushButtonKey)) {
+		if(!isPressing() && !oldIsPress) {
 			isCollected = false;
 		}
-		
 		return false;
+	}
+
+	private boolean isPressing() {
+		return Gdx.input.isKeyPressed(pushButtonKey) || updateSwitch();
 	}
 	
 	private float removeNearestnote() {

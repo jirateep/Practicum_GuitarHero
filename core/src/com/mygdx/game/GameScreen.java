@@ -9,10 +9,12 @@ public class GameScreen extends ScreenAdapter {
 	private GuitarHeroGame guitarHeroGame;
 	private World world;
 	private WorldRenderer worldRenderer;
-	
+	private HardWare hardWare;
 	public GameScreen(GuitarHeroGame guitarHeroGame) {
 		this.guitarHeroGame = guitarHeroGame;
-		world = new World();
+		hardWare = new HardWare();
+		hardWare.initHardWare();
+		world = new World(hardWare);
 		worldRenderer = new WorldRenderer(world);
 	}
 	

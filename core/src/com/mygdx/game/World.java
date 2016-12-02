@@ -42,7 +42,9 @@ public class World {
 	
 	public int maxScore;
 	
-	public World() {
+	public HardWare hardWare;
+	
+	public World(HardWare hardWare) {
 		
 		songList = new SongList(this);
 		songList.getSong();
@@ -73,9 +75,11 @@ public class World {
 		xPosition[GREEN] = GuitarHeroGame.WIDTH/2 + halfDistance;
 		xPosition[YELLOW] = GuitarHeroGame.WIDTH/2 + 3 * halfDistance + eachLineImg[BLUE][UNPRESS].getWidth();
 
+		this.hardWare = hardWare;
+		
 		lines = new NoteLine [NBOFCOLOR];
 		for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i] = new NoteLine(xPosition[i],note[i],timer,keys[i],eachLineImg[i],i);
+			lines[i] = new NoteLine(xPosition[i],note[i],timer,keys[i],eachLineImg[i],i,hardWare);
 		}
 		
 		dotImg = new Texture("dotResize.png");
