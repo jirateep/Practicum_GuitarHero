@@ -75,8 +75,38 @@ public class WorldRenderer {
 	}
 	
 	private void drawHomeMenu() {
-		drawSongNameForHome();
-		drawCreatedBy();
+		if(!world.homeMenu.isCreditsOn){
+			drawLogo();
+			drawSongNameForHome();
+			//drawCreatedBy();
+			drawButton();
+		} else {
+			drawCredits();
+		}
+	}
+	
+	private void drawCredits() {
+		String [] credits = {"idea:","Guitar Hero Game","",
+				             "notes:","Thapster","",
+				             "image:","http://www.clipartbest.com/electric-guitar-vector-free","https://commons.wikimedia.org/wiki/File:The_red_button.png","",
+				             "font:","Arcade","","","",
+				             "    created by Jirateep Tantisuwankul,Peerapong Tawantaweekit"};
+		
+		for(int i=0;i<credits.length;i++) {
+			w_gFont.draw(batch,credits[i],50,GuitarHeroGame.HEIGHT - 100 - i*50);
+		}
+	}
+	
+	private void drawLogo() {
+		float xPosition = getCenterXPosition(HomeMenu.logo.getWidth());
+		batch.draw(HomeMenu.logo,xPosition,500);
+	}
+	
+	private void drawButton() {
+		batch.draw(HomeMenu.redButton,525,150,125,125);
+		batch.draw(HomeMenu.blueButton,725,150,125,125);
+		batch.draw(HomeMenu.greenButton,925,150,125,125);
+		batch.draw(HomeMenu.yellowButton,1125,150,125,125);
 	}
 	
 	private void drawCreatedBy() {
