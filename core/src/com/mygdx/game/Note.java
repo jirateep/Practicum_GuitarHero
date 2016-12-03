@@ -77,7 +77,7 @@ public class Note {
 			World.score.nowComboString = World.score.comboStrings[Score.MISS];
 			
 			removeThis = true;
-			World.score.updateCombo(-1);
+			World.score.updateCombo(-1,0);
 		}
 	}
 }

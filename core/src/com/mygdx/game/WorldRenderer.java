@@ -340,7 +340,7 @@ public class WorldRenderer {
 	}
 	
 	public void drawPressButton(NoteLine lineCircle) {
-		if(lineCircle.isPress) {
+		if(lineCircle.isPressing()) {
 			batch.draw(lineCircle.pushPressButtonImg, lineCircle.x,lineCircle.buttonYPosition);
 			lineCircle.isPress = false;
 		} else {

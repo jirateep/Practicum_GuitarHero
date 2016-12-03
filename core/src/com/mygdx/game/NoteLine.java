@@ -79,7 +79,6 @@ public class NoteLine {
 	private boolean isButtonPress() {
 		if(isPressing() && !isCollected && !oldIsPress) {
 			isPress = true;
-			
 			isCollected = true;
 			return true;
 		}
@@ -89,7 +88,7 @@ public class NoteLine {
 		return false;
 	}
 
-	private boolean isPressing() {
+	public boolean isPressing() {
 		return Gdx.input.isKeyPressed(pushButtonKey) || updateSwitch();
 	}
 	
@@ -97,7 +96,7 @@ public class NoteLine {
 		float distance = Float.MAX_VALUE;
 		if(notes[delPos] != null) {
 			distance = notes[delPos].position.y - buttonYPosition;
-			if(distance <= 200){
+			if(distance <= World.score.distanceCriteria[Score.BAD]){
 				notes[delPos].removeThis = true;
 				removeNote();
 				isCollected = true;

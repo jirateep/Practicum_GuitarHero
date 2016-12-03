@@ -54,7 +54,7 @@ public class Score {
 	public void updateScore(float distance) {
 		int nowCombo = cirteriaScore(distance);
 		increaseScore(nowCombo);
-		updateCombo(nowCombo);
+		updateCombo(nowCombo,distance);
 		//System.out.println("score: " + score);
 		//System.out.println("combo: " + combo);
 	}
@@ -71,11 +71,11 @@ public class Score {
 		}
 	}
 	
-	public void updateCombo(int nowCombo) {
+	public void updateCombo(int nowCombo,float distance) {
 		//System.out.println("pass");
 		if(nowCombo >= PERFECT && nowCombo <= GOOD) {
 			combo++;
-		} else {
+		} else if(distance != Float.MAX_VALUE){
 			combo = 0;
 		}
 		maxCombo = Math.max(maxCombo, combo);
