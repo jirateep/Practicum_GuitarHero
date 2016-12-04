@@ -8,13 +8,18 @@ public class HardWare {
 	public boolean [] isSwitchPress;
 	public boolean [] LED;
 	public boolean foundHardWare;
+	public static final int REDPORT = 0;
+	public static final int BLUEPORT = 1;
+	public static final int GREENPORT = 2;
+	public static final int YELLOWPORT = 3;
 	
-	public void initHardWare() {//throws Exception{
+	public void initHardWare() {
 		isSwitchPress = new boolean [World.NBOFCOLOR];
 		LED = new boolean [World.NBOFCOLOR];
 		for(int i=0;i<LED.length;i++) {
 			LED[i] = false;
 		}
+		
 		McuBoard.initUsb();
 		
        	devices = McuBoard.findBoards();
@@ -72,21 +77,20 @@ public class HardWare {
 			System.out.println(value);
 			switch(i) {
 				case World.RED:
-					peri.setLed(1, value);
+					peri.setLed(REDPORT, value);
 					break;
 				case World.BLUE:
-					peri.setLed(3, value);
+					peri.setLed(BLUEPORT, value);
 					break;
 				case World.YELLOW:
-					peri.setLed(6, value);
+					peri.setLed(YELLOWPORT, value);
 					break;
 				case World.GREEN:
-					peri.setLed(5, value);
+					peri.setLed(GREENPORT, value);
 					break;
 				default:
 					break;
 			}
 		}
-		//peri.setLedValue(5);
 	}
 }

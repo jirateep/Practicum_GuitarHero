@@ -78,7 +78,6 @@ public class WorldRenderer {
 		if(!world.homeMenu.isCreditsOn){
 			drawLogo();
 			drawSongNameForHome();
-			//drawCreatedBy();
 			drawButton();
 		} else {
 			drawCredits();
@@ -107,13 +106,6 @@ public class WorldRenderer {
 		batch.draw(HomeMenu.blueButton,725,150,125,125);
 		batch.draw(HomeMenu.greenButton,925,150,125,125);
 		batch.draw(HomeMenu.yellowButton,1125,150,125,125);
-	}
-	
-	private void drawCreatedBy() {
-		String str = "created by Jirateep Tantisuwankul,Peerapong Tawantaweekit";
-		float width = getFontWidth(w_gFont,str);
-		float xPosition = getRightXPosition(width)-30;
-		w_gFont.draw(batch,str,xPosition,30);
 	}
 	
 	private void drawSongNameForHome() {

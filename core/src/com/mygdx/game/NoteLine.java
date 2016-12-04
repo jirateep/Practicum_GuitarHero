@@ -55,10 +55,10 @@ public class NoteLine {
 	}
 	
 	public void isEnd() {
-		
+		System.out.println(color+" "+songTime.length+" "+passed+" "+countToEnd);
 		if(passed == songTime.length) {
 			countToEnd++;
-			if(countToEnd == maxCountToEnd) {
+			if(countToEnd >= maxCountToEnd) {
 				endNotes = true;
 			}
 		}

@@ -65,10 +65,10 @@ public class SongList {
 		world.note = new int [World.NBOFCOLOR][];
 		for(int i=0;i<World.NBOFCOLOR;i++) {
 			int len = songNote[name][i].length;
-			world.note[i] = new int [len];
+			int [] notes = new int [len];
 			int add = 0;
 			for(int j=0;j<len;j++) {
-				if(j==0 ||(j!=0 && songNote[name][i][j]-songNote[name][i][j-1]>1)) {
+				if(j==0 ||(j!=0 && songNote[name][i][j]-songNote[name][i][j-1]>2)) {
 					int noteData = songNote[name][i][j];
 					int ms = noteData % 100;
 					noteData /= 100;
@@ -79,13 +79,17 @@ public class SongList {
 					if(j!=0 && songNote[name][i][j] <= songNote[name][i][j-1]) {
 						System.out.println("error wrongNote: "+i+" "+songNote[name][i][j]);
 					} else {
-						world.note[i][add] = (int) (trueMiliSec*changeFactor-GuitarHeroGame.HEIGHT/World.speed+delay);
+						notes[add] = (int) (trueMiliSec*changeFactor-GuitarHeroGame.HEIGHT/World.speed+delay);
 						add++;
 						allCount++;
 					}
 				} else {
 					System.out.println("Error shortDistance: "+i+" "+songNote[name][i][j-1]+" "+songNote[name][i][j]);
 				}
+			}
+			world.note[i] = new int [add];
+			for(int j=0;j<add;j++){
+				world.note[i][j] = notes[j];
 			}
 		}
 		world.maxScore = (allCount*100);//+(allCount*(allCount+1)*5);

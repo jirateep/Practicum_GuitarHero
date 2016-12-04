@@ -52,8 +52,6 @@ public class World {
 	
 		songList = new SongList(this);
 		homeMenu = new HomeMenu(this);
-		//songList.getSong(SongList.REDO);
-		//song.play();
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
 		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
 		eachLineImg[RED][PRESS] = new Texture("redButtonFramePress.png");
@@ -83,9 +81,6 @@ public class World {
 		this.hardWare = hardWare;
 		
 		lines = new NoteLine [NBOFCOLOR];
-		/*for(int i=0;i<NBOFCOLOR;i++) {
-			lines[i] = new NoteLine(xPosition[i],note[i],timer,keys[i],eachLineImg[i],i,hardWare);
-		}*/
 		
 		dotImg = new Texture("dotResize.png");
 		dotLine = new DotLine(dotImg,this);
@@ -106,8 +101,6 @@ public class World {
 				timer.update();
 				dotLine.update();
 				score.updateReachComboTime();
-				//printPass();
-				//endMenu.update();
 				isEnd();
 			} else {
 				endMenu.update();
@@ -129,12 +122,10 @@ public class World {
 				countEnd++;
 			}
 		}
-		//System.out.println(countEnd);
 		if(countEnd == NBOFCOLOR) {
 			endingSong = true;
 			return;
 		}
-		//System.out.println("justContinue");
 		endingSong = false;
 	}
 }
