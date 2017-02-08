@@ -87,6 +87,7 @@ public class HomeMenu {
 			world.startingSong = false;
 			world.timer.timer = 0;
 			world.percentSong = 0;
+			World.score.setComboZero();
 			previewSong.stop();
 			previewSong = world.songList.songSound[selection];
 			world.song.play();

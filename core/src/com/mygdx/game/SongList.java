@@ -144,7 +144,7 @@ public class SongList {
 				world.note[i][j] = notes[j];
 			}
 		}
-		world.score.maxScore = (allCount*100)+(allCount*(allCount+1)*5);
+		world.score.maxScore = (allCount*80)+(allCount*(allCount+1)*5);
 		world.score.allCombo = allCount;
 	}
 }

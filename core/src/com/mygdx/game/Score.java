@@ -36,11 +36,11 @@ public class Score {
 		scoreCriteria[MISS] = 0;
 		
 		distanceCriteria = new int [NBOFCRITERIA];
-		distanceCriteria[PERFECT] = 100;
-		distanceCriteria[EXCELLENT] = 170;
-		distanceCriteria[GOOD] = 250;
+		distanceCriteria[PERFECT] = 80;
+		distanceCriteria[EXCELLENT] = 150;
+		distanceCriteria[GOOD] = 220;
 		distanceCriteria[BAD] = 300;
-		distanceCriteria[MISS] = 450;
+		distanceCriteria[MISS] = 400;
 		
 		comboStrings = new String [NBOFCRITERIA];
 		comboStrings[PERFECT] = "PERFECT";
@@ -116,5 +116,12 @@ public class Score {
 		} else {
 			world.timer.reachComboTimeStart = false;
 		}
+	}
+	
+	public void setComboZero() {
+		countCombo = new int[NBOFCRITERIA];
+		score = 0;
+		maxCombo = 0;
+		combo = 0;
 	}
 }

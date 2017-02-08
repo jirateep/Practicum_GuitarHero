@@ -12,7 +12,7 @@ public class EndMenu {
 	public int countCanPress = 0;
 	public int maxCountCanPress = 20;
 	public int maxScore;
-	public float [] criteria = {95,75,50};//SS S A B C D
+	public float [] criteria = {90,70,40};//SS S A B C D
 	
 	public EndMenu(World world) {
 		this.world = world;
@@ -22,7 +22,6 @@ public class EndMenu {
 		finalScore = World.score.score;
 		if(world.endingSong) {
 			if(count < finalScore) {
-				//System.out.println(count);
 				int now = (int)(Math.random() * finalScore / 30.0);
 				count+=now;
 				if(count > finalScore) {
@@ -30,9 +29,7 @@ public class EndMenu {
 				}
 				scoreString = String.format("%5d",count);
 			} else {
-				//System.out.println("calRank");
 				calRank();
-				//System.out.println(rank);
 			}
 		}
 		returnStarting();
@@ -79,7 +76,6 @@ public class EndMenu {
 	private void calRank() {
 		maxScore = World.score.maxScore;
 		float percent = ((float)finalScore)*100/maxScore;
-		//System.out.println(percent + " " + maxScore);
 		if(isAllPerfect()) {
 			rank = "SS";
 		} else if(isAllCombo()) {
