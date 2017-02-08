@@ -4,6 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class SongList {
 	
 	public int [][][] songNote;
@@ -13,18 +22,45 @@ public class SongList {
 	public int [] songSpeed;
 	public static final int ROOMEARAI = 0;
 	public static final int REDO = 1;
-	public static final int NBOFSONG = 2;
+	public static int NBOFSONG = 2;
 	public static final int MAXCOLOR = 4;
 	private World world;
 	
+	private JSONObject data;
+	
 	public SongList(World world) {
 		this.world = world;
+		
+		JSONParser parser = new JSONParser();
+		Object obj;
+		try {
+			obj = parser.parse(new FileReader("songlist.json"));
+			data = (JSONObject) obj;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		NBOFSONG = getNbofSong();
 		songNote = new int [NBOFSONG][MAXCOLOR][];
 		songName = new String [NBOFSONG];
 		songImg = new Texture [NBOFSONG];
 		songSound = new Sound [NBOFSONG];
 		songSpeed = new int [NBOFSONG];
 		initSong();
+	}
+	
+	private int getNbofSong() {
+		JSONArray list = (JSONArray) data.get("songlist");
+		int nbSong = list.size();
+		System.out.print(nbSong);
+		return ((JSONArray) data.get("songlist")).size();
 	}
 	
 	private void initSong() {
