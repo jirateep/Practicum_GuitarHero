@@ -29,7 +29,7 @@ public class HomeMenu {
 		initSelection = 0;
 		maxSelection = songList.length - 1;
 		selection = initSelection;
-		previewSong = world.songList.songSound[selection];
+		previewSong = world.songList.getSongSound(selection);
 		previewSong.play();
 	}
 	
@@ -57,7 +57,7 @@ public class HomeMenu {
 				if(selection<0)
 					selection = maxSelection;
 				previewSong.stop();
-				previewSong = world.songList.songSound[selection];
+				previewSong = world.songList.getSongSound(selection);
 				previewSong.play();
 			}
 			oldKey = -1;
@@ -67,7 +67,7 @@ public class HomeMenu {
 				if(selection>maxSelection)
 					selection = initSelection;
 				previewSong.stop();
-				previewSong = world.songList.songSound[selection];
+				previewSong = world.songList.getSongSound(selection);
 				previewSong.play();
 			}
 			oldKey = 1;
