@@ -1,17 +1,13 @@
 package com.mygdx.game;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class SongList {
 	
@@ -132,17 +128,10 @@ public class SongList {
 					last = nowNote[i][j-1];
 				}
 				if(j==0 ||(j!=0 && now-last>2)) {
-					int noteData = now;
-					int ms = noteData % 100;
-					noteData /= 100;
-					int s = noteData %100;
-					noteData /=100;
-					int m = noteData;
-					int trueMiliSec = ms + s*30 + m*30*60;
 					if(j!=0 && now <= last) {
 						System.out.println("error wrongNote: "+i+" "+now);
 					} else {
-						notes[add] = (int) (trueMiliSec*changeFactor-GuitarHeroGame.HEIGHT/World.speed+delay);
+						notes[add] = (int) (now*changeFactor-GuitarHeroGame.HEIGHT/World.speed+delay);
 						add++;
 						allCount++;
 					}
@@ -157,6 +146,5 @@ public class SongList {
 		}
 		world.score.maxScore = (allCount*100)+(allCount*(allCount+1)*5);
 		world.score.allCombo = allCount;
-		//System.out.println(world.maxScore);
 	}
 }

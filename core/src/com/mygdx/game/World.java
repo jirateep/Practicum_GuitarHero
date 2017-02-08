@@ -53,22 +53,10 @@ public class World {
 		songList = new SongList(this);
 		homeMenu = new HomeMenu(this);
 		eachLineImg = new Texture [NBOFCOLOR][NBOFSTATE];
-		eachLineImg[RED][UNPRESS] = new Texture("redButtonFrame.png");
-		eachLineImg[RED][PRESS] = new Texture("redButtonFramePress.png");
-		eachLineImg[RED][NOTE] = new Texture("redCircle.png");
-		eachLineImg[RED][NOTECOMBO] = new Texture("redCircleCombo.png");
-		eachLineImg[BLUE][UNPRESS] = new Texture("blueButtonFrame.png");
-		eachLineImg[BLUE][PRESS] = new Texture("blueButtonFramePress.png");
-		eachLineImg[BLUE][NOTE] = new Texture("blueCircle.png");
-		eachLineImg[BLUE][NOTECOMBO] = new Texture("blueCircleCombo.png");
-		eachLineImg[GREEN][UNPRESS] = new Texture("greenButtonFrame.png");
-		eachLineImg[GREEN][PRESS] = new Texture("greenButtonFramePress.png");
-		eachLineImg[GREEN][NOTE] = new Texture("greenCircle.png");
-		eachLineImg[GREEN][NOTECOMBO] = new Texture("greenCircleCombo.png");
-		eachLineImg[YELLOW][UNPRESS] = new Texture("yellowButtonFrame.png");
-		eachLineImg[YELLOW][PRESS] = new Texture("yellowButtonFramePress.png");
-		eachLineImg[YELLOW][NOTE] = new Texture("yellowCircle.png");
-		eachLineImg[YELLOW][NOTECOMBO] = new Texture("yellowCircleCombo.png");
+		addEachLine(RED,"red");
+		addEachLine(BLUE,"blue");
+		addEachLine(GREEN,"green");
+		addEachLine(YELLOW,"yellow");
 		
 		timer = new Timer();
 		
@@ -87,6 +75,14 @@ public class World {
 		
 		score = new Score(this);
 		endMenu = new EndMenu(this);
+	}
+
+	public void addEachLine(int colorCode, String color) {
+		Texture [] eachline = new Texture[NBOFSTATE];
+		eachLineImg[colorCode][UNPRESS] = new Texture(color + "ButtonFrame.png");
+		eachLineImg[colorCode][PRESS] = new Texture(color + "ButtonFramePress.png");
+		eachLineImg[colorCode][NOTE] = new Texture(color + "Circle.png");
+		eachLineImg[colorCode][NOTECOMBO] = new Texture(color + "CircleCombo.png");
 	}
 	
 	public void update(float delta) {

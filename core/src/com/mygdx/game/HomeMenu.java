@@ -74,9 +74,6 @@ public class HomeMenu {
 		} else {
 			oldKey = 0;
 		}
-		
-		
-		
 	}
 	
 	public void selectSong() {
